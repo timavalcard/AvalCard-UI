@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f1ba76e2-abd1-46f3-b056-c862bcb19d54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\laragon\bin\php\php-7.4.9\php.exe" />
+  <component name="ProjectId" id="2uL68VY1c1jYKibZnyC8xZGaODt" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\panel" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\helpers\api" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\components\layout\main" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1742228969532</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742228969532</updated>
+      <workItem from="1742228970652" duration="757000" />
+      <workItem from="1743592962822" duration="12337000" />
+      <workItem from="1743695017208" duration="8221000" />
+      <workItem from="1743763285095" duration="6400000" />
+      <workItem from="1743792158713" duration="19000" />
+      <workItem from="1743870904077" duration="5360000" />
+      <workItem from="1743953349287" duration="1332000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="581" y="96" key="FileChooserDialogImpl" timestamp="1743875432640">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="581" y="96" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1743875432640" />
+    <state x="479" y="0" width="1130" height="1040" key="find.popup" timestamp="1743872804114">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="479" y="0" width="1130" height="1040" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1743872804114" />
+    <state x="364" y="228" key="run.anything.popup" timestamp="1743698138727">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="364" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1743698138727" />
+  </component>
+</project>

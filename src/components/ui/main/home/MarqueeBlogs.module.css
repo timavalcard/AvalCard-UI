@@ -1,0 +1,54 @@
+.verticalMarqueeContainer {
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    
+}
+
+.verticalMarquee {
+    display: flex;
+    flex-direction: column;
+    animation: verticalMarquee 50s linear infinite;
+    transform: translateY(-50%);
+}
+
+@keyframes verticalMarquee {
+    0% {
+        transform: translateY(-50%);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.box{
+    position: relative;
+    overflow: hidden;
+}
+
+.box::before,
+.box::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 130px;
+    pointer-events: none;
+    z-index: 2;
+    filter: blur(10px);
+}
+
+.box::before {
+    bottom: -20px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.box::after {
+    top: -20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}

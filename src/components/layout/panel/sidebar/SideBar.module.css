@@ -1,0 +1,29 @@
+
+
+.sidebar{
+    box-shadow: 0 0 8px #9F9F9F40;
+    border-radius: 0px 0px 0px 20px;
+    background-color: #fff;
+    z-index: 999;
+    /* height: 100%; */
+}
+@media (max-width:768px) {
+    .sidebar{
+        position: fixed;
+        max-width: none !important;
+        height: 100vh !important;
+        overflow-y: auto;
+        display: grid;
+        align-content: start;
+    }
+    .hidden{
+        transform: translateX(100%);
+    }
+}
+
+
+
+
+
+
+

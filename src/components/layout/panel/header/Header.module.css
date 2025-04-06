@@ -1,0 +1,66 @@
+.inpBox{
+    width: 19.625rem;
+    height: 3.125rem;
+    border: 1px solid #464646;
+    border-radius: 10px;
+}
+.badgee{
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+top: 0.6rem;
+right: 0.8rem;
+}
+.shoppingCart{
+    border-radius: 10px;
+    position: relative;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 3.75rem;
+    height: 3.125rem;
+    border: 1px solid #464646;
+}
+.subTitle{
+    font-weight: 400;
+    font-size: 0.4375rem;
+    color: #464646;
+}
+.userBox{
+    border: 1px solid #464646;
+    border-radius: 10px;
+}
+
+.inpBoxContent{
+    position: relative;
+}
+
+/*.inpBoxContent input:focus ~ label,*/
+.inpBoxContent input:not(:placeholder-shown) ~ label
+{
+    display: none;
+}
+
+.inpBoxContent label{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 28px;
+    color: #464646;
+    font-size: 14px;
+    cursor: text;
+}
+
+.inpBoxContent input{
+    border: 0 !important;
+    outline: 0;
+}
+
+

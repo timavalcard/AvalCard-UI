@@ -1,0 +1,26 @@
+.content h3,
+.content h2 {
+    @apply mt-6;
+}
+
+.content h2 {
+    @apply !font-bold mb-2 relative;
+}
+
+.content h3 {
+    @apply mb-1 !font-bold;
+}
+
+.content h2::before {
+    content: '';
+    right: -30px;
+    @apply bg-blue-custom absolute w-2.5 h-full rounded-sm;
+}
+
+.content p{
+    @apply leading-6
+}
+
+.content ul{
+    @apply mr-4 list-disc;
+}

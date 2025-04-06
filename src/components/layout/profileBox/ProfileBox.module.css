@@ -1,0 +1,57 @@
+.profilePanel{
+    position: absolute;
+    top: calc(100% + 8px);
+    width: 150%;
+    padding: 16px;
+    right: -25%;
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 99;
+    transition: .3s;
+    max-height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: .1s;
+}
+
+.userBox{
+    border: 1px solid #464646;
+    border-radius: 10px;
+}
+
+.subTitle{
+    font-weight: 400;
+    font-size: 0.4375rem;
+    color: #464646;
+}
+
+
+.header{
+    justify-content: space-between;
+    display: flex;
+    align-items: flex-start;
+}
+
+.items{
+    display: grid;
+    /* gap: 10px; */
+}
+
+.item{
+    display: flex;
+    gap: .3rem;
+    padding: .5rem .625rem;
+    border-radius: 10px;
+}
+
+.profileParent:hover .profilePanel{
+    transition-delay: 0s;
+    max-height: 30rem;
+    opacity: 1;
+    visibility: visible;
+}
+
+.profileParent{
+    width: 183px;
+}

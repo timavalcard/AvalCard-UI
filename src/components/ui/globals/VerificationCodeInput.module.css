@@ -1,0 +1,10 @@
+.input_box{
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+}
+.input_box input {
+    /* width: 50px; */
+    text-align: center;
+    box-shadow: 0 0 15px #7575751A;
+}

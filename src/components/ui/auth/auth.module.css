@@ -1,0 +1,50 @@
+.boxLogin{
+    padding: 4vh;
+}
+
+.boxLoginSignup{
+    margin: auto;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+ }
+
+.loginSignup{
+    width: 23.0625rem;
+}
+
+.lineUnderBox{
+    width: 1.5625rem;
+    height: 0.3125rem;
+    border-radius: 10px;
+}
+.forgetPasssword{
+    font-size: 0.625rem;
+    @apply text-blue-custom;
+    font-weight: 700;
+}
+.orLine{
+    width: 10.1875rem;
+    height: 1px;
+    background: linear-gradient(to left ,#66666600,#B1B1B1BF);
+    margin-top: 1.4rem;
+}
+.orLineSecond{
+    width: 10.1875rem;
+    height: 1px;
+    background: linear-gradient(to right ,#66666600,#B1B1B1BF);
+    margin-top: 1.4rem;
+
+}
+.btnGoGoogle{
+    box-shadow: none !important;
+    border: 1px solid #E5E5E5;
+}
+.boxGetCode{
+    width: 3.125rem;
+    height: 3.125rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #B6B6B633;
+    outline: none;
+    border: none;
+}

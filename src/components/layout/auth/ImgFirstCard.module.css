@@ -1,0 +1,45 @@
+.boxImg {
+    height: 92vh;
+    border-radius: 50px;
+    /* margin: 2.050625rem 5.41875rem 2.06125rem 2.0625rem; */
+    width: 100%;
+    /* background: linear-gradient(225.26deg, #3664FF 34.34%, #1143EB 96.57%); */
+    background: url(/images/bg-login.svg);
+    background-position: center bottom;
+    background-size: cover;
+    background-color: #fff;
+    position: relative;
+}
+.imgDots{
+    transform:  rotatey(180deg);
+    position: absolute;
+    top: 0.87625rem;
+    left: 0.018125rem;
+}
+.imgDotsBottom{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.boxContactUs{
+    width: 19vh;
+    height: 19vh;
+    position: absolute;
+    left: .5rem;
+    bottom: .75rem;
+    border-radius: 0 50px 0 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.contactUs{
+    cursor: pointer;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 14vh;
+    height: 14vh;
+    background-color: #EFC83F;
+    box-shadow: 0 0 15px #A6A6A640;
+    border-radius: 100%;
+}
