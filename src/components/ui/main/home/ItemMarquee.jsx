@@ -4,7 +4,7 @@ export default function ItemMarquee(props){
     return(
         <div className={`font-medium ${styles.boxItem}`}>
             <div>
-            <img src={props.icon} />
+            <img loading="lazy" src={props.icon} />
             </div>
 
             <div className={`mt-4 ${styles.info}`}>

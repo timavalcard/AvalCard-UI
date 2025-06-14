@@ -17,14 +17,14 @@ export const login = (mobile, password,setErrors,setIsLoading, callback) => asyn
             Cookies.set('token', authToken,{
                 expires: 7,
                 path: '/',
-                domain: '.avalcard.com',
+                domain: process.env.NEXT_PUBLIC_SITE_URL,
                 secure: true,
                 sameSite: 'Lax'
             })
             Cookies.set('user', user,{
                 expires: 7,
                 path: '/',
-                domain: '.avalcard.com',
+                domain: process.env.NEXT_PUBLIC_SITE_URL,
                 secure: true,
                 sameSite: 'Lax'
             })
@@ -72,7 +72,7 @@ export const checkLoginStatus = () => async (dispatch) => {
             console.log(response)
             if(response.message && response.message == "Unauthenticated."){
 
-                Cookies.remove('token', { domain: '.avalcard.com', path: '/' })
+                Cookies.remove('token', { domain: process.env.NEXT_PUBLIC_SITE_URL, path: '/' })
                 dispatch({ type: 'LOGOUT' });
             } else{
 
@@ -80,11 +80,11 @@ export const checkLoginStatus = () => async (dispatch) => {
             }
 
         } catch (error) {
-            Cookies.remove('token', { domain: '.avalcard.com', path: '/' })
+            Cookies.remove('token', { domain: process.env.NEXT_PUBLIC_SITE_URL, path: '/' })
             dispatch({ type: 'LOGOUT' });
         }
     } else {
-        Cookies.remove('token', { domain: '.avalcard.com', path: '/' })
+        Cookies.remove('token', { domain: process.env.NEXT_PUBLIC_SITE_URL, path: '/' })
         dispatch({ type: 'LOGOUT' });
     }
 
@@ -99,7 +99,7 @@ export const logout = (callback) => async (dispatch) => {
             },
         });*/
 
-        Cookies.remove('token', { domain: '.avalcard.com', path: '/' })
+        Cookies.remove('token', { domain: process.env.NEXT_PUBLIC_SITE_URL, path: '/' })
         dispatch({ type: 'LOGOUT' });
         callback()
     } catch (error) {
@@ -121,26 +121,66 @@ export const register = (email,password,code, callback) => async (dispatch) => {
             Cookies.set('token', authToken,{
                 expires: 7,
                 path: '/',
-                domain: '.avalcard.com',
+                domain: process.env.NEXT_PUBLIC_SITE_URL,
                 secure: true,
                 sameSite: 'Lax'
             })
             Cookies.set('user', user,{
                 expires: 7,
                 path: '/',
-                domain: '.avalcard.com',
+                domain: process.env.NEXT_PUBLIC_SITE_URL,
                 secure: true,
                 sameSite: 'Lax'
             })
             // ذخیره توکن در Redux
             dispatch({ type: 'LOGIN', payload: authToken,user:user });
+            callback();
         } else{
             alert("کد تأیید نادرست است")
         }
 
 
         // فراخوانی callback
-        callback();
+
+
+    } catch (error) {
+        console.error('Error checking code existence:', error);
+        return false;
+    }
+};
+
+export const loginByCode = (email,code, callback) => async (dispatch) => {
+
+    try {
+        const response = await APIRequest.post('login-check-code', { email,code });
+        const data = response.data;
+        if(data.access_token){
+            const { access_token, token_type,user } = data
+            const authToken = `${token_type} ${access_token}`;
+            Cookies.set('token', authToken,{
+                expires: 7,
+                path: '/',
+                domain: process.env.NEXT_PUBLIC_SITE_URL,
+                secure: true,
+                sameSite: 'Lax'
+            })
+            Cookies.set('user', user,{
+                expires: 7,
+                path: '/',
+                domain: process.env.NEXT_PUBLIC_SITE_URL,
+                secure: true,
+                sameSite: 'Lax'
+            })
+            // ذخیره توکن در Redux
+            dispatch({ type: 'LOGIN', payload: authToken,user:user });
+            callback();
+        } else{
+            alert("کد تأیید نادرست است")
+        }
+
+
+        // فراخوانی callback
+
 
     } catch (error) {
         console.error('Error checking code existence:', error);
@@ -167,7 +207,7 @@ export const  UpdateProfile =(data,setShowFeedback,setError,callback) => async (
         }else if(user){
             user = await response.data.data;
             if(response.message && response.message === "Unauthenticated."){
-                Cookies.remove('token', { domain: '.avalcard.com', path: '/' })
+                Cookies.remove('token', { domain: process.env.NEXT_PUBLIC_SITE_URL, path: '/' })
                 dispatch({ type: 'LOGOUT' });
             } else{
                 setShowFeedback(true)
@@ -199,7 +239,7 @@ export const  submitAuthorAndMedicalReviewer =(data,setIsLoading,callback) => as
         });
         user = await response.data.data;
         if(response.message && response.message === "Unauthenticated."){
-            Cookies.remove('token', { domain: '.avalcard.com', path: '/' })
+            Cookies.remove('token', { domain: process.env.NEXT_PUBLIC_SITE_URL, path: '/' })
             dispatch({ type: 'LOGOUT' });
         } else{
             dispatch({ type: 'LOGIN',user:user });

@@ -1,0 +1,54 @@
+.modal {
+    position: absolute;
+    top: calc(100% + 6px);
+
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: inline-flex;
+    padding: 10px;
+    transition: .3s;
+    z-index: 999999;
+}
+
+.modal.show{
+    opacity: 1;
+}
+
+.modal.hide{
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+}
+
+.modal.adjustLeft,
+.modal.adjustRight
+{
+    left: 0;
+    transform: translateX(0%);
+}
+
+.content {
+    background: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.svgIcon{
+    top: -2px;
+    position: absolute;
+}
+
+.svgIconPos{
+    left: 0 !important;
+    right: 0;
+    margin: auto;
+}
+
+.textGray{
+    color: #97A3B7;
+}
+.textGray2{
+    color: #677489;
+}

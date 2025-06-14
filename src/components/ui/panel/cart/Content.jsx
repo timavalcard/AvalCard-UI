@@ -1,78 +1,70 @@
 "use client"
 
-import { useState } from "react";
-import Items from "./Items";
+import { useState,useEffect } from "react";
 import Total from "./Total";
+import PriceDollar from "../../globals/PriceDollar";
+import CartItems from "./CartItems";
+import Payment from "./Payment";
+import DiscountedCode from "./DiscountedCode";
+import {addOrder} from "../../../../helpers/api/cart/addOrder";
+import { useRouter } from "next/navigation";
 
-const fakeItems = [
-    {
-        id: 1,
-        title: "گیفت کارت اپل",
-        region: "ریجن آمریکا",
-        originalPrice: 113500,
-        discountedPrice: 72000,
-        discountPercentage: "15",
-        quantity: 1,
-        imageUrl: "/images/twitchBig.svg",
-    },
-    {
-        id: 2,
-        title: "گیفت کارت آمازون",
-        region: "ریجن اروپا",
-        originalPrice: 95000,
-        discountedPrice: 65000,
-        discountPercentage: "15",
-        quantity: 2,
-        imageUrl: "/images/twitchBig.svg",
-    },
-    {
-        id: 3,
-        title: "گیفت کارت گوگل",
-        region: "ریجن آسیا",
-        originalPrice: 120000,
-        discountedPrice: 85000,
-        discountPercentage: "15",
-        quantity: 1,
-        imageUrl: "/images/twitchBig.svg",
-    },
-    {
-        id: 4,
-        title: "گیفت کارت نتفلیکس",
-        region: "ریجن آمریکا",
-        originalPrice: 100000,
-        discountedPrice: 75000,
-        discountPercentage: "15",
-        quantity: 3,
-        imageUrl: "/images/twitchBig.svg",
-    },
-];
 
-export default function Content() {
-    const [items, setItems] = useState(fakeItems);
+export default function Content({cart}) {
+    const router = useRouter();
+    const [payment, setPayment] = useState(false);
+    const [cartData, setCart] = useState(cart);
+    const [active, setActive] = useState('zarinpal')
+    const [walletFail, setWalletFail] = useState(false)
+    const next = async () => {
+        if(!payment){
+        setPayment(true)
 
-    const handleRemove = (id) => {
-        setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        } else{
+            const order = await addOrder(active,cartData.ten_percent,cartData.fees,setWalletFail)
+
+            if(order.id){
+                //router.push(`/panel/orders/${order.id}`)
+            }
+        }
     };
 
-    const handleQuantityChange = (id, newQuantity) => {
-        setItems((prevItems) =>
-            prevItems.map((item) =>
-                item.id === id ? { ...item, quantity: newQuantity } : item
-            )
-        );
-    };
+
 
     return (
-        <div className="grid grid-cols-12 gap-8 mt-custom-3">
-            <div className="col-span-8">
-                <Items
-                    items={items}
-                    onRemove={handleRemove}
-                    onQuantityChange={handleQuantityChange}
-                />
+        <div className="grid md:grid-cols-12 grid-cols-1 gap-8 mt-custom-3">
+            <div className="md:col-span-8">
+                {
+                    <div className={`${payment ? 'hidden' : 'FadeInAnimate'}`}>
+                        <CartItems setCart={setCart} data={cartData.products} />
+                    </div>
+                }
+                {
+                    <div className={`${!payment ? 'hidden' : 'FadeInAnimate'}`}>
+                        <Payment walletFail={walletFail}  setActive={setActive} active={active}/>
+
+                        <DiscountedCode
+                        setCart={setCart}
+                        data={cartData.products}
+                        />
+                    </div>
+                }
             </div>
-            <div className="col-span-4">
-                <Total items={items} />
+            <div className="md:col-span-4 space-y-3.5">
+                <Total
+                    price_without_fee={cartData.cart_products_total_price_without_fee}
+                    items={cartData.products}
+                    totalPrice={cartData.cart_total_price}
+                    ten_percent={cartData.ten_percent}
+                    fees={cartData.fees}
+                    cart_products_offer_price={cartData.cart_products_offer_price}
+                    cart_full_price={cartData.cart_full_price}
+                    total={cartData.cart_products_total_number}
+                    coupon_amount={cartData.coupon_amount}
+                    next={next}
+                />
+
+                <PriceDollar dollar={cartData.dollar} />
             </div>
         </div>
     );

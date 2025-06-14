@@ -5,9 +5,9 @@ export default function AboutGift() {
     return (
         <div className="grid md:grid-cols-2 grid-cols-1 mt-28 gap-10 items-center">
             <div className="relative">
-                <img src="/images/about-us-gift.svg" className="w-full" />
+                <img loading="lazy" src="/images/photo_2025-05-12_14-00-18.jpg" className="rounded-lg !w-full !h-full object-contain" width={300} height={300} />
                 <div className="right-0 left-0 mx-auto flex justify-center absolute bottom-8">
-                <Button flex className={'!rounded-full'} color="blue" size="auto">
+                <Button flex className={'!rounded-full'} color="blue" size="auto" href='/about-us'>
                     <div>
                         درباره ما
                     </div>
@@ -22,10 +22,10 @@ export default function AboutGift() {
             </div>
             <div>
                 <TitleWithIcon
-                    title={'درباره گیفتــی فـــای'}
+                    title={'درباره اول کارت'}
                 />
                 <div className="mt-3 opacity-50 font-normal mr-6">
-                    بهترین تکنولوژی ها امروزه در دست فاهوش هست  شما میتوانید با استفاده از  تیم های پشتیبانی فوق العاده  آن و ویژگی های منحصر به فرد سامانه فاهوش که چند مورد ان را میتوانید در لیست زیر مشاهده کنید بهترین ها را برای زندگی خود رقم بزنید
+                در دنیایی که مرزهای خرید و درآمد به‌سرعت در حال جهانی شدن است، اول‌کارت به عنوان همراهی قابل اعتماد در کنار فریلنسرها، گیمرها و خریداران ایرانی قرار گرفته است. هدف ما ساده‌سازی فرآیندهای پرداخت ارزی، خرید از وب‌سایت‌های بین‌المللی و نقد کردن درآمدهای دلاری است؛ آن هم بدون پیچیدگی‌های معمول و با پشتیبانی دقیق. ما به جای وعده، راهکار ارائه می‌دهیم.
                 </div>
 
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-8 mt-16">
@@ -40,10 +40,10 @@ export default function AboutGift() {
                         </div>
                         <div>
                             <div>
-                                +1 میلیون
+                                +5 هزار
                             </div>
                             <div className="opacity-40 text-sm mt-1.5">
-                                بیشتر از یک میلیون کاربر فعال
+                                بیش از 5 هزار کاربر فعال
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ export default function AboutGift() {
                         </div>
                         <div>
                             <div>
-                                +10 سال
+                                +3 سال
                             </div>
                             <div className="opacity-40 text-sm mt-1.5">
                                 سابقه فعالیت
@@ -87,7 +87,7 @@ export default function AboutGift() {
                         </div>
                         <div>
                             <div>
-                                +2500 هزار
+                                +150 هزار
                             </div>
                             <div className="opacity-40 text-sm mt-1.5">
                                 شرکت‌ها و مشتریان بزرگ
@@ -108,7 +108,7 @@ export default function AboutGift() {
                         </div>
                         <div>
                             <div>
-                                +200 خدمات
+                                +5 خدمات
                             </div>
                             <div className="opacity-40 text-sm mt-1.5">
                                 بیش از 200 خدمات متنوع

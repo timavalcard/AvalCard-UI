@@ -1,6 +1,6 @@
 import styles from './Styles.module.css'
 
-export default function SwiperDots({ swiperInstance, slides, activeIndex }) {
+export default function SwiperDots({ swiperInstance, slides, activeIndex, width="9" }) {
     if (!swiperInstance || !swiperInstance.params) return null;
 
     const slidesPerView = swiperInstance.params.slidesPerView || 1;
@@ -18,8 +18,7 @@ export default function SwiperDots({ swiperInstance, slides, activeIndex }) {
                         swiperInstance.slideTo(index);
                     }}
                     className="cursor-pointer"
-                    width="9"
-                    height="9"
+                    width={width}
                     viewBox="0 0 9 9"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"

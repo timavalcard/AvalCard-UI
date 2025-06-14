@@ -1,6 +1,9 @@
-export default function AskedQuestionsBox() {
+import Link from "next/link";
+
+export default function AskedQuestionsBox({className}) {
     return (
-        <div className="px-3 py-4 border rounded-2xl border-[#1A2531] border-opacity-15">
+        <Link href={'/faq'}>
+        <div className={`px-3 py-4 border rounded-2xl border-[#1A2531] border-opacity-15 ${className}`}>
             <div className="flex gap-1.5 text-blue-custom font-bold justify-center text-center">
                 <div>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,5 +19,6 @@ export default function AskedQuestionsBox() {
                 چنانچه سوالی دارید می‌توانید با جستجو در قسمت سوالات متداول پاسخ اکثر سوالات خود را بیابید ، در صورتیکه به پاسخ مورد نظر خود دست نیافتید می‌توانید از طریق ارسال تیکت با ما در ارتباط باشید.
             </div>
         </div>
+        </Link>
     );
 }

@@ -1,6 +1,8 @@
-export default function Section({ icon, text, className }) {
+import Link from "next/link";
+
+export default function Section({ icon, text, className, href }) {
     return (
-        <div className={`${className} grid gap-3 h-[120px] items-center text-center justify-center rounded-[20px] cursor-pointer`}>
+        <Link href={href} className={`${className} grid gap-3 h-[120px] items-center text-center justify-center rounded-[20px] cursor-pointer`}>
             <div className="text-center">
 
                 <div>
@@ -10,6 +12,6 @@ export default function Section({ icon, text, className }) {
                     {text}
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }

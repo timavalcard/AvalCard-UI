@@ -14,7 +14,7 @@ export default function EndFooter() {
                 }
             </div>
             <div className="md:text-left text-center" dir="ltr">
-                © 2023 Aval Card
+                © 2025 Aval Card
             </div>
         </div>
     )

@@ -8,6 +8,9 @@ import { useState } from 'react'
 export default function ClientContent() {
 
     const [step, setStep] = useState(1);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
 
     const next = () => {
         setStep(pre => pre+1)
@@ -20,10 +23,10 @@ export default function ClientContent() {
     return(
         <>
         <div className={step !== 1 && 'hidden'}>
-        <LoginForm next={next}/>
+        <LoginForm setPassword={setPassword} setEmail={setEmail} next={next}/>
         </div>
         <div className={step !== 2 && 'hidden'}>
-        <VerificationCode pre={pre} step={step}/>
+            <VerificationCode email={email} password={password} pre={pre} step={step} />
         </div>
         </>
     );

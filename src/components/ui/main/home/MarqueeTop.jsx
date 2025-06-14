@@ -8,31 +8,31 @@ export default function MarqueeTop() {
         {
             title: 'امیررضا پهلوان',
             des: 'در سال 1380 به گروه اول کارت پیوست و در سمت مدیر اجرایی خوش درخشید.',
-            icon: '/images/user-1.svg',
+            icon: '/images/user-1.webp',
             job: 'مدیر اجرایی'
         },
         {
             title: 'امیررضا پهلوان',
             des: 'در سال 1380 به گروه اول کارت پیوست و در سمت مدیر اجرایی خوش درخشید.',
-            icon: '/images/user-2.svg',
+            icon: '/images/user-2.webp',
             job: 'مدیر اجرایی'
         },
         {
             title: 'امیررضا پهلوان',
             des: 'در سال 1380 به گروه اول کارت پیوست و در سمت مدیر اجرایی خوش درخشید.',
-            icon: '/images/user-1.svg',
+            icon: '/images/user-1.webp',
             job: 'مدیر اجرایی'
         },
         {
             title: 'امیررضا پهلوان',
             des: 'در سال 1380 به گروه اول کارت پیوست و در سمت مدیر اجرایی خوش درخشید.',
-            icon: '/images/user-2.svg',
+            icon: '/images/user-2.webp',
             job: 'مدیر اجرایی'
         },
         {
             title: 'امیررضا پهلوان',
             des: 'در سال 1380 به گروه اول کارت پیوست و در سمت مدیر اجرایی خوش درخشید.',
-            icon: '/images/user-1.svg',
+            icon: '/images/user-1.webp',
             job: 'مدیر اجرایی'
         },
     ]

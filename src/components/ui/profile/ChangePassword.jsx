@@ -6,9 +6,12 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Button from "../globals/Button";
-
+import InputError from "../globals/InputError";
+import { fetchUpdatePassword } from "../../../helpers/api/updateProfile/updatePassword";
+import { useState } from "react"
+import FeedBack from "../globals/FeedBack";
 export default function ChangePassword() {
-
+    const [loading, setLoading] = useState(false)
     const schema = yup.object().shape({
         beforePassword: yup
             .string()
@@ -28,46 +31,68 @@ export default function ChangePassword() {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
     });
+    let [ShowFeedback, setShowFeedback] = useState(false);
+    let [passwordInCorrect, setPasswordInCorrect] = useState(false);
 
-    const onSubmit = (data) => {
-        
-      };
+    const onSubmit = async (data) => {
+        setLoading(true)
+        setShowFeedback(false)
+        await fetchUpdatePassword(data, setPasswordInCorrect, setShowFeedback);
+        setLoading(false)
+        reset()
+    };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-custom-2 text-base text-muted-0 font-medium">
-        تغییر پسورد
-        </div>
-        <div className="grid grid-cols-2 gap-y-4 gap-x-5 mt-4">
-                <InputPassword
-                    error={errors.beforePassword?.message}
-                    name='beforePassword'
-                    register={register}
-                    placeholder="رمز عبور قبلی" />
-            <div className="">
-            </div>
+        <>
+            {ShowFeedback && <FeedBack text={"رمز عبور شما با موفقیت به روز شد"} />}
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="mt-custom-2 text-base text-muted-0 font-medium">
+                    تغییر پسورد
+                </div>
+                <div className="grid md:grid-cols-2 grid-cols-1 gap-y-4 gap-x-5 mt-4">
+                    <div>
+                        <InputPassword
+                            error={errors.beforePassword?.message}
+                            name='beforePassword'
+                            register={register}
+                            placeholder="رمز عبور قبلی" />
+                        <InputError error={errors.beforePassword?.message} />
+                        {passwordInCorrect && <InputError error={"رمز عبور قبلی اشتباه است"} />}
+                    </div>
 
-            <InputPassword
-                error={errors.password?.message}
-                name='password'
-                register={register}
-                placeholder="رمز عبور جدید" />
+                    <div className="md:block hidden">
+                    </div>
 
-            <InputPassword
-                error={errors.rePassword?.message}
-                name='rePassword'
-                register={register}
-                placeholder="تکرار رمز عبور جدید" />
-        </div>
+                    <div>
+                        <InputPassword
+                            error={errors.password?.message}
+                            name='password'
+                            register={register}
+                            placeholder="رمز عبور جدید" />
+                        <InputError error={errors.password?.message} />
+                    </div>
 
-        <Button className={'mt-custom-3 mx-auto'} size="xl">
-            تایید
-        </Button>
-        </form>
+                    <div>
+                        <InputPassword
+                            error={errors.rePassword?.message}
+                            name='rePassword'
+                            register={register}
+                            placeholder="تکرار رمز عبور جدید" />
+                        <InputError error={errors.rePassword?.message} />
+                    </div>
+                </div>
+
+                <Button className={'mt-custom-3 mx-auto'} size="2xl" loading={loading}>
+                    تایید
+                </Button>
+            </form>
+        </>
+
 
     );
 }

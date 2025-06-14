@@ -1,6 +1,6 @@
 import Button from "../../globals/Button";
 
-const formatPrice = (price) => price.toLocaleString() + " تومان";
+const formatPrice = (price) => price;
 
 const ItemSummary = ({ title, price }) => (
     <div className="flex justify-between items-center">
@@ -9,21 +9,7 @@ const ItemSummary = ({ title, price }) => (
     </div>
 );
 
-export default function Total({ items }) {
-
-    const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-
-    const totalOriginal = items.reduce(
-        (sum, item) => sum + item.originalPrice * item.quantity,
-        0
-    );
-
-    const totalDiscounted = items.reduce(
-        (sum, item) => sum + item.discountedPrice * item.quantity,
-        0
-    );
-
-    const totalDiscount = totalOriginal - totalDiscounted;
+export default function Total({ items,fees,ten_percent,price_without_fee,coupon_amount,cart_full_price ,totalPrice,cart_products_offer_price, next,total, discountedCode=0 }) {
 
     return (
         <>
@@ -53,17 +39,21 @@ export default function Total({ items }) {
                     </div>
 
                     <div className="space-y-4 mt-5">
-                        <ItemSummary title={`مبلغ کل ( ${totalItems} کالا )`} price={totalOriginal} />
-                        <ItemSummary title="سود شما از خرید" price={totalDiscount} />
+                        <ItemSummary title={`مبلغ کل ( ${total}  عدد ) `} price={price_without_fee} />
+                        {/*<ItemSummary title={`کارمزد`} price={fees} />
+                        <ItemSummary title={`مالیات و ارزش افزوده`} price={ten_percent} />*/}
+                        {coupon_amount != 0 && <ItemSummary title={`کد تخفیف`} price={coupon_amount} />}
+                        {cart_products_offer_price && cart_products_offer_price != 0 && cart_products_offer_price != "0 تومان" && <ItemSummary title="سود شما از خرید" price={cart_products_offer_price} />}
+                        {/*{fees && fees != 0 && fees != "0 تومان" && <ItemSummary title="کارمزد سفارش" price={fees} />}*/}
                     </div>
                 </div>
 
                 <div className="py-5 px-6 bg-blue-custom bg-opacity-10 text-sm flex font-bold justify-between text-blue-custom items-center">
                     <div>مبلغ قابل پرداخت</div>
-                    <div className="text-lg">{formatPrice(totalDiscounted)}</div>
+                    <div className="text-lg">{totalPrice}</div>
                 </div>
             </div>
-            <Button flex size="full" gradient={'blue'} className={'!rounded-xl !h-[3.3rem] mt-4'}>
+            <Button flex size="full" gradient={'blue'} className={'!rounded-xl !h-[3.3rem] mt-4'} onClick={next}>
                 ادامه فرایند خرید
             </Button>
             <div className="text-xs  leading-5 mt-2.5">

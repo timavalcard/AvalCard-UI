@@ -10,7 +10,7 @@ export default function Header() {
                 <div className='flex gap-7 items-center'>
                     <Link href={'/'} className='flex items-center gap-1'>
                         <div>
-                            <Image width={50} height={50} src="/images/Logo.svg" alt="Logo" />
+                            <Image width={50} height={50} src="/images/Logo.webp" alt="Logo" />
                         </div>
                         <div>
                             اول کارت

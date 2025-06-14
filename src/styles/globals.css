@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-@font-face {
+/* @font-face {
     font-family: 'IRANYekanWebRegular';
     src: url('/fonts/iranyekan/Farsi_numerals/WebFonts/fonts/eot/iranyekanwebregularfanum.eot');
     src: url('/fonts/iranyekan/Farsi_numerals/WebFonts/fonts/eot/iranyekanwebregularfanum.eot?#iefix') format('embedded-opentype'),
@@ -79,7 +79,38 @@
     font-weight: 300;
     font-style: normal;
     font-display: swap;
-}
+} */
+
+@font-face {
+    font-family: 'YekanBakh';
+    src: url('/fonts/YekanBakh/Variable/webfonts/YekanBakh-VF.woff2') format('woff2'),
+         url('/fonts/YekanBakh/Variable/webfonts/YekanBakh-VF.woff') format('woff');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  /* FaNum Version (Persian/Arabic numbers) */
+  @font-face {
+    font-family: 'YekanBakhFaNum';
+    src: url('/fonts/YekanBakh/Variable/webfonts/YekanBakhFaNum-VF.woff2') format('woff2'),
+         url('/fonts/YekanBakh/Variable/webfonts/YekanBakhFaNum-VF.woff') format('woff');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  /* NoEn Version (Keep English fonts unchanged) */
+  @font-face {
+    font-family: 'YekanBakhNoEn';
+    src: url('/fonts/YekanBakh/Variable/webfonts/YekanBakhNoEnVF.woff2') format('woff2'),
+         url('/fonts/YekanBakh/Variable/webfonts/YekanBakhNoEnVF.woff') format('woff');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  
 
 html {
     font-size: 16px;
@@ -94,9 +125,14 @@ body {
     direction: rtl;
     text-align: right;
 
-    font-family: 'IRANYekanWebRegular', sans-serif;
+    font-display: swap;
+    font-family: 'YekanBakhFaNum', sans-serif;
 
     background-color: #FEFEFE;
+}
+
+.font{
+    font-family: 'YekanBakhFaNum' !important; 
 }
 
 * {
@@ -313,10 +349,6 @@ a:hover {
     /* Firefox */
 }
 
-.container {
-    margin: auto;
-}
-
 
 .title-header {
     font-size: 2.25rem;
@@ -360,4 +392,30 @@ ol.custom-counter>li:before {
 ol.custom-counter ol {
     counter-reset: item;
     margin-right: .5rem;
+}
+
+.content-ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 10px);
+  display: block;
+}
+
+.article-content h2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+.article-content h3 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.article-content h4{
+    font-size: 19px;
+    font-weight: bold;
+}
+.article-content h5 {
+    font-size: 16px;
+    font-weight: bold;
 }

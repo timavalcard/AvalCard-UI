@@ -1,7 +1,7 @@
 export default function Banner() {
     return (
         <div className="relative">
-            <img src="/images/contact-us.svg" />
+            <img loading="lazy" src="/images/contact-us.webp" />
             <div className="absolute top-[50%] -translate-y-1/2 container mx-auto right-0 left-0 text-white">
                 <div className="text-[2rem] font-black">
                     تماس با ما

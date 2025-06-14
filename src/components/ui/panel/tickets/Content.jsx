@@ -15,16 +15,21 @@ export default function Content({tickets}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedDept, setSelectedDept] = useState("");
 
-    const departments = ["همه", "امور مالی", "امور اداری", "فنی"];
+    const departments = ["همه", "فروش", "پشتیبانی"
+        , "خرید گیفت کارت"
+        , "نقد کردن درآمد"
+        , "خرید کالا"
+        , "پرداخت در وب سایت‌های خارجی"
+    ];
 
     const filteredData = data.filter((item) => {
 
         const matchSearch =
-            item.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            item.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.subject.toLowerCase().includes(searchQuery.toLowerCase())
+            /*item.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
             item.lastUpdate.toLowerCase().includes(searchQuery.toLowerCase()) ||
             item.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            item.date.toLowerCase().includes(searchQuery.toLowerCase());
+            item.date.toLowerCase().includes(searchQuery.toLowerCase());*/
 
         const matchDepartment =
             selectedDept === "همه" || selectedDept === "" || item.department === selectedDept;
@@ -42,7 +47,7 @@ export default function Content({tickets}) {
 
     return (
         <div >
-            <div className="section flex mt-custom-4 justify-between">
+            <div className="section md:flex grid mt-custom-4 gap-y-4 md:justify-between justify-center"> 
                 <div className="flex gap-6">
                     <div>
                         <Input
@@ -73,7 +78,7 @@ export default function Content({tickets}) {
                         />
                     </div>
                 </div>
-                <Button flex size="auto" className={'!rounded-[12px] !text-sm !h-[3.025rem]'} href="/panel/tickets/add">
+                <Button flex size="auto" className={'!rounded-[12px] !text-sm !h-[3.025rem] mx-auto'} href="/panel/tickets/add">
                     <div>
                         <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_528_1416)">
@@ -106,7 +111,7 @@ export default function Content({tickets}) {
                         </tr>
                     </thead>
                     <tbody>
-                    {filteredData.map((item,index) => (
+                    {filteredData.length > 0 && filteredData.map((item,index) => (
                         <tr key={item.id}>
                             <td>{index+1}</td>
                             <td>{item.created_at}</td>

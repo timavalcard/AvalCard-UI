@@ -4,7 +4,7 @@ export default function Blog({ img, category, title, des, date, href='/' }) {
     return (
         <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
             <Link href={href} className="md:col-span-5 col-span-1 relative">
-                <img src={img} className="w-full rounded-xl" />
+                <img loading="lazy" src={img} className="w-full rounded-xl" />
 
                 <div className="flex gap-2 text-xs items-center bg-white py-2 px-2.5 rounded-full absolute top-4 right-1/2 translate-x-1/2  w-auto">
                     <div>
@@ -27,7 +27,7 @@ export default function Blog({ img, category, title, des, date, href='/' }) {
                 </div>
             </Link>
             <div className="md:col-span-7 col-span-1">
-                <div className="flex gap-2 items-center">
+                {/*<div className="flex gap-2 items-center">
                     <div>
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14.4302 15.05H9.43018" stroke="#3F5AEF" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -38,14 +38,14 @@ export default function Blog({ img, category, title, des, date, href='/' }) {
                     <div className="opacity-60 ">
                         {category}
                     </div>
-                </div>
+                </div>*/}
 
                 <Link href={href} className="mt-2 text-[#002D3C] text-lg font-semibold">
                     {title}
                 </Link>
 
-                <div className="mt-4 text-sm opacity-60">
-                    {des}
+                <div className="mt-4 text-sm opacity-60" dangerouslySetInnerHTML={{__html:des}}>
+
                 </div>
             </div>
         </div>
