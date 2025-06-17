@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+
+  avalfront:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: avalfront
+    restart: always
+    ports:
+      - "4345:4345"
+    networks:
+      - frontend-net
+
+networks:
+  frontend-net:
+    driver: bridge
