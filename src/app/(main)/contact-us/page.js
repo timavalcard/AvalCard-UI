@@ -1,34 +1,238 @@
-import Banner from "@/components/ui/main/contactUs/Banner";
-import Form from "@/components/ui/main/contactUs/Form";
-import Info from "@/components/ui/main/contactUs/Info";
-import SocialMedia from "@/components/ui/main/contactUs/SocialMedia";
 
-export const metadata = {
-    title: 'تماس با ما'
+import TitleWithBorder from "@/components/layout/main/TitleWithBorder";
+import Button from "@/components/ui/globals/Button";
+import Form from "@/components/ui/main/contactUs/Form";
+import Location from "@/components/ui/main/contactUs/Location";
+import fetchPageContent from "../../../helpers/api/page-detail";
+
+export const dynamic = 'force-dynamic';
+export async function generateMetadata() {
+    const { data: page } = await fetchPageContent("contact-us");
+
+    return {
+        title: page.meta_title,
+        description: page.meta_description,
+        robots: `${page.meta_follow}, ${page.meta_index}`,
+        openGraph: {
+            locale: "fa_IR",
+            type: "website",
+            title: page.meta_title,
+            description: page.meta_description,
+            url: page.url,
+            siteName: "اول کارت",
+            updatedTime: page.updated_at,
+            images: [
+                {
+                    url: "/img/logo.png",
+                    secureUrl: "/img/logo.png",
+                    width: 1200,
+                    height: 630,
+                    alt: "اول کارت",
+                    type: "image/jpeg",
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: page.meta_title,
+            description: page.meta_description,
+        },
+        alternates: {
+            canonical: page.url,  // اضافه کردن URL canonical به متاداده‌ها
+        }
+    };
 }
 
-export default function Page() {
+const Item = ({ title, children, svg }) => {
     return (
-        <>
-
-            <Banner />
-
-            <div className="container ">
-                <div className="grid mt-6 grid-cols-12 gap-6">
-                    <div className="col-span-7">
-                        <Info />
-
-                        <SocialMedia />
-
-                    </div>
-                    <div className="col-span-5 -mt-32 relative z-10">
-                        <Form />
-                    </div>
+        <div className="flex gap-1.5 items-start">
+            <div>
+                {svg}
+            </div>
+            <div>
+                <div className="font-black text-blue-custom text-base">
+                    {title}
                 </div>
-                
+                <div className="text-sm font-medium mt-1.5">
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+const SocialItem = ({ children, href, className }) => {
+    return (
+        <a href={href} className={`flex items-center text-sm py-3 gap-1.5 text-white hover:text-white hover:shadow-lg transition-all duration-500 px-6 rounded-xl ${className}`}>
+            {children}
+        </a>
+    );
+}
+
+
+
+export default function ContactUs() {
+
+
+    return (
+        <section className="container  pt-6">
+
+            <div>
+                <TitleWithBorder>
+                    تماس با اول کارت
+                </TitleWithBorder>
             </div>
 
+            <div className="md:flex grid gap-2 gap-y-4 justify-between items-center">
+                <div className="font-medium text-[#202020]">
+                    لطفاً پیش از ارسال ایمیل و یا تماس تلفنی، پرسش های متداول را مشاهده کنید.
+                </div>
+                <Button outline={'blue'} size="auto" href={'/faq'} className={'mx-auto'}>
+                    پرسش های متداول
+                </Button>
+            </div>
 
-        </>
+            <div className="my-8">
+                <svg className='w-full' preserveAspectRatio="none" height="2" viewBox="0 0 952 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0.75" y1="1.25" x2="951.25" y2="1.24992" stroke="#EAEAEA" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="5 5" />
+                </svg>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-10">
+
+                <Form />
+
+                <div className="text-[#202020] space-y-4">
+                    <h3 className="text-xl font-bold">اطلاعات فروشگاه</h3>
+                    <p className="text-sm mb-4">
+                        راه های ارتباطی با اول کارت که می‌توانید با ما در ارتباط باشید.
+                    </p>
+
+                    {/* <Item svg={
+                        <svg width="25" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.66602 9.26218C4.66602 6.2639 7.05383 3.83331 9.99935 3.83331C12.9449 3.83331 15.3327 6.2639 15.3327 9.26218C15.3327 12.237 13.6305 15.7083 10.9746 16.9496C10.3555 17.239 9.64318 17.239 9.02406 16.9496C6.36823 15.7083 4.66602 12.237 4.66602 9.26218Z" stroke="#3F5AEF" stroke-width="1.5" />
+                            <circle cx="10" cy="9.16669" r="2" stroke="#3F5AEF" stroke-width="1.5" />
+                        </svg>
+                    }
+                        title={'آدرس'}
+                    >
+                        مشهد - خیابان بهشتی - خیابان ابوعلی سینا - پلاک ۱۶
+                    </Item> */}
+
+                    <Item svg={
+                        <svg width="25" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 3.83337C11 3.83337 12.5556 3.9748 14.5355 5.95469C16.5154 7.93459 16.6569 9.49023 16.6569 9.49023" stroke="#3F5AEF" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M11.4707 6.19043C11.4707 6.19043 12.1307 6.37899 13.1206 7.36894C14.1106 8.35889 14.2991 9.01886 14.2991 9.01886" stroke="#3F5AEF" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M12.0671 12.5181L11.5234 12.0016L12.0671 12.5181ZM12.3708 12.1985L12.9146 12.715H12.9146L12.3708 12.1985ZM13.9819 11.9749L13.6077 12.6249L13.9819 11.9749ZM15.2556 12.708L14.8814 13.358L15.2556 12.708ZM15.6144 15.0056L16.1582 15.5221L15.6144 15.0056ZM14.6674 16.0027L14.1236 15.4862L14.6674 16.0027ZM13.7842 16.4754L13.8579 17.2218L13.7842 16.4754ZM7.21024 13.4835L7.75403 12.9669L7.21024 13.4835ZM4.00193 7.14396L3.253 7.18415V7.18416L4.00193 7.14396ZM8.31835 8.16874L8.86214 8.68526H8.86214L8.31835 8.16874ZM8.42283 6.2954L9.03522 5.86242V5.86242L8.42283 6.2954ZM7.58217 5.10641L6.96978 5.53939L6.96978 5.53939L7.58217 5.10641ZM5.50763 4.90576L6.05143 5.42228V5.42228L5.50763 4.90576ZM4.46123 6.00742L3.91744 5.49091L3.91744 5.49091L4.46123 6.00742ZM9.37541 11.2039L9.91921 10.6874L9.37541 11.2039ZM12.6109 13.0347L12.9146 12.715L11.827 11.682L11.5234 12.0016L12.6109 13.0347ZM13.6077 12.6249L14.8814 13.358L15.6297 12.058L14.356 11.3249L13.6077 12.6249ZM15.0707 14.4891L14.1236 15.4862L15.2112 16.5192L16.1582 15.5221L15.0707 14.4891ZM13.7105 15.729C12.8187 15.8171 10.4026 15.7554 7.75403 12.9669L6.66645 14C9.68023 17.1729 12.5771 17.3482 13.8579 17.2218L13.7105 15.729ZM7.75403 12.9669C5.21279 10.2915 4.80184 8.05374 4.75085 7.10376L3.253 7.18416C3.32221 8.47354 3.86816 11.0539 6.66645 14L7.75403 12.9669ZM8.67093 8.88657L8.86214 8.68526L7.77455 7.65223L7.58334 7.85353L8.67093 8.88657ZM9.03522 5.86242L8.19456 4.67343L6.96978 5.53939L7.81043 6.72838L9.03522 5.86242ZM4.96384 4.38925L3.91744 5.49091L5.00503 6.52394L6.05143 5.42228L4.96384 4.38925ZM8.12714 8.37005C7.58334 7.85353 7.58265 7.85426 7.58196 7.855C7.58172 7.85524 7.58103 7.85598 7.58056 7.85648C7.57962 7.85748 7.57867 7.8585 7.5777 7.85954C7.57578 7.86161 7.57381 7.86375 7.57179 7.86596C7.56777 7.87039 7.56357 7.8751 7.55922 7.88011C7.55052 7.89011 7.54119 7.90129 7.5314 7.91366C7.51182 7.9384 7.49035 7.96795 7.46824 8.00251C7.42386 8.07186 7.37738 8.16063 7.33855 8.26974C7.25929 8.49249 7.22037 8.77619 7.27045 9.11795C7.36825 9.78546 7.79677 10.6309 8.83162 11.7204L9.91921 10.6874C8.98405 9.70288 8.78844 9.13142 8.7546 8.9005C8.73886 8.79305 8.75725 8.75716 8.75174 8.77262C8.7498 8.77809 8.74431 8.7913 8.73171 8.81099C8.72548 8.82072 8.71759 8.83193 8.70762 8.84452C8.70263 8.85082 8.69712 8.85748 8.69103 8.86448C8.68799 8.86798 8.68479 8.87157 8.68145 8.87525C8.67977 8.87709 8.67806 8.87896 8.67631 8.88084C8.67543 8.88179 8.67455 8.88273 8.67365 8.88369C8.6732 8.88416 8.67252 8.88488 8.6723 8.88512C8.67162 8.88584 8.67093 8.88657 8.12714 8.37005ZM8.83162 11.7204C9.86198 12.8052 10.6756 13.2712 11.3398 13.3791C11.6834 13.4349 11.972 13.3916 12.1988 13.3021C12.3091 13.2586 12.3979 13.2069 12.4662 13.1585C12.5002 13.1343 12.5292 13.111 12.5531 13.09C12.5651 13.0795 12.5759 13.0695 12.5855 13.0602C12.5903 13.0556 12.5949 13.0511 12.5991 13.0468C12.6012 13.0447 12.6033 13.0426 12.6052 13.0406C12.6062 13.0396 12.6072 13.0386 12.6081 13.0376C12.6086 13.0371 12.6093 13.0364 12.6095 13.0361C12.6102 13.0354 12.6109 13.0347 12.0671 12.5181C11.5234 12.0016 11.524 12.0009 11.5247 12.0002C11.5249 11.9999 11.5256 11.9992 11.5261 11.9988C11.527 11.9978 11.5279 11.9969 11.5288 11.9959C11.5306 11.9941 11.5324 11.9923 11.5341 11.9905C11.5377 11.987 11.5411 11.9836 11.5445 11.9803C11.5512 11.9738 11.5577 11.9678 11.564 11.9623C11.5764 11.9514 11.5879 11.9424 11.5984 11.935C11.6195 11.92 11.6365 11.9114 11.6484 11.9068C11.6783 11.895 11.6633 11.912 11.5803 11.8985C11.3911 11.8678 10.8589 11.6767 9.91921 10.6874L8.83162 11.7204ZM8.19456 4.67343C7.4353 3.59955 5.89852 3.4052 4.96384 4.38925L6.05143 5.42228C6.28276 5.17873 6.71175 5.17445 6.96978 5.53939L8.19456 4.67343ZM4.75085 7.10376C4.74116 6.92329 4.81818 6.72066 5.00503 6.52394L3.91744 5.49091C3.52613 5.90288 3.21571 6.48931 3.253 7.18415L4.75085 7.10376ZM14.1236 15.4862C13.965 15.6532 13.8225 15.718 13.7105 15.729L13.8579 17.2218C14.4331 17.165 14.8883 16.8592 15.2112 16.5192L14.1236 15.4862ZM8.86214 8.68526C9.5942 7.91454 9.64047 6.71846 9.03522 5.86242L7.81043 6.72838C8.0271 7.03483 7.98457 7.43112 7.77455 7.65223L8.86214 8.68526ZM14.8814 13.358C15.2933 13.5951 15.3638 14.1805 15.0707 14.4891L16.1582 15.5221C17.1436 14.4847 16.8536 12.7625 15.6297 12.058L14.8814 13.358ZM12.9146 12.715C13.0901 12.5301 13.3636 12.4844 13.6077 12.6249L14.356 11.3249C13.5261 10.8472 12.4909 10.983 11.827 11.682L12.9146 12.715Z" fill="#3F5AEF" />
+                        </svg>
+
+                    }
+                        title={'تلفن های تماس'}
+                    >
+                       {/* تلفن پشتیبانی:
+                        <a href="tel:02191035179"> ۹۱۰۳۵۱۷۹ - ۰۲۱ </a>
+                        <span className="px-5">|</span>*/}
+                        تلفن پشتیبانی: <a href="tel:09300952804" dir="ltr">
+                            093 009 528 04 </a>
+                    </Item>
+
+                    <Item svg={
+                        <svg width="25" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.0007 6.56781C14.8674 6.65306 15.4508 6.84574 15.8863 7.2812C16.6673 8.06225 16.6673 9.31932 16.6673 11.8335C16.6673 14.3476 16.6673 15.6047 15.8863 16.3858C15.1052 17.1668 13.8481 17.1668 11.334 17.1668H8.66732C6.15316 17.1668 4.89608 17.1668 4.11503 16.3858C3.33398 15.6047 3.33398 14.3476 3.33398 11.8335C3.33398 9.31932 3.33398 8.06225 4.11503 7.2812C4.55049 6.84574 5.13391 6.65306 6.00065 6.56781" stroke="#3F5AEF" stroke-width="1.5" />
+                            <path d="M8.66602 6.5H11.3327" stroke="#3F5AEF" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M9.33398 8.5H10.6673" stroke="#3F5AEF" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M10 11.8966C9.2759 11.8966 8.66369 11.3864 7.43926 10.366C6.73152 9.77624 6.37764 9.48135 6.18882 9.07821C6 8.67507 6 8.21443 6 7.29315V7.16665C6 5.5953 6 4.80962 6.48816 4.32147C6.97631 3.83331 7.76198 3.83331 9.33333 3.83331H10.6667C12.238 3.83331 13.0237 3.83331 13.5118 4.32147C14 4.80962 14 5.5953 14 7.16665V7.29315C14 8.21443 14 8.67507 13.8112 9.07821C13.6224 9.48135 13.2685 9.77624 12.5607 10.366L12.5607 10.366C11.3363 11.3864 10.7241 11.8966 10 11.8966Z" stroke="#3F5AEF" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M6 9.16669L7.43926 10.3661C8.66369 11.3864 9.2759 11.8966 10 11.8966C10.7241 11.8966 11.3363 11.3864 12.5607 10.3661L14 9.16669" stroke="#3F5AEF" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+
+                    }
+                        title={'پست الکترونیکی'}
+                    >
+                        <a href="mailto:Avalcard.company@gmail.com">
+                            Avalcard.company@gmail.com
+                        </a>
+                    </Item>
+
+                    <div className="mt-4 flex items-center gap-1 font-bold ">
+                        <div>
+                            <svg width="22" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.99935 10.5C7.99935 11.4205 7.25316 12.1666 6.33268 12.1666C5.41221 12.1666 4.66602 11.4205 4.66602 10.5C4.66602 9.57951 5.41221 8.83331 6.33268 8.83331C7.25316 8.83331 7.99935 9.57951 7.99935 10.5Z" stroke="#202020" stroke-width="1.5" />
+                                <path d="M11.3333 6.83331L8 9.16665" stroke="#202020" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M11.3333 14.1667L8 11.8334" stroke="#202020" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M14.6673 14.8334C14.6673 15.7538 13.9211 16.5 13.0007 16.5C12.0802 16.5 11.334 15.7538 11.334 14.8334C11.334 13.9129 12.0802 13.1667 13.0007 13.1667C13.9211 13.1667 14.6673 13.9129 14.6673 14.8334Z" stroke="#202020" stroke-width="1.5" />
+                                <path d="M14.6673 6.16667C14.6673 7.08714 13.9211 7.83333 13.0007 7.83333C12.0802 7.83333 11.334 7.08714 11.334 6.16667C11.334 5.24619 12.0802 4.5 13.0007 4.5C13.9211 4.5 14.6673 5.24619 14.6673 6.16667Z" stroke="#202020" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div>
+                            ما را در شبكه های اجتماعی دنبال کنید.
+                        </div>
+                    </div>
+
+
+                    <div className="">
+                        <div className="md:flex md:px-0 px-16 grid gap-3">
+                            <SocialItem href={'https://www.instagram.com/avalcard'} className={'bg-gradient-to-r from-pink-500 to-yellow-500'}>
+                                <div>
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_733_1732)">
+                                            <path d="M18.668 4.66663H9.33464C6.75731 4.66663 4.66797 6.75596 4.66797 9.33329V18.6666C4.66797 21.244 6.75731 23.3333 9.33464 23.3333H18.668C21.2453 23.3333 23.3346 21.244 23.3346 18.6666V9.33329C23.3346 6.75596 21.2453 4.66663 18.668 4.66663Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M14 17.4999C15.933 17.4999 17.5 15.9329 17.5 13.9999C17.5 12.0669 15.933 10.4999 14 10.4999C12.067 10.4999 10.5 12.0669 10.5 13.9999C10.5 15.9329 12.067 17.4999 14 17.4999Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M19.25 8.75V8.751" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_733_1732">
+                                                <rect width="28" height="28" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <div>
+                                    اینستاگرام اول کارت
+                                </div>
+                            </SocialItem>
+                            <SocialItem href={'https://t.me/avalcard'} className={'bg-gradient-to-r from-[#27ACED] to-[#219DDA]'}>
+                                <div>
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_733_1729)">
+                                            <path d="M17.5 11.6666L12.8333 16.3333L19.8333 23.3333L24.5 4.66663L3.5 12.8333L8.16667 15.1666L10.5 22.1666L14 17.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_733_1729">
+                                                <rect width="28" height="28" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+
+                                </div>
+                                <div>
+                                    تلگرام
+                                </div>
+                            </SocialItem>
+                            <SocialItem href={'https://wa.me/989300952804'} className={'bg-gradient-to-r from-[#45EC62] to-[#23CC44]'}>
+                                <div>
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_733_1740)">
+                                            <path d="M3.5 24.5L5.425 20.0667C3.95227 17.9761 3.29311 15.4199 3.57122 12.8778C3.84933 10.3357 5.04558 7.98252 6.93549 6.2598C8.8254 4.53708 11.279 3.56327 13.8359 3.52114C16.3928 3.47901 18.8772 4.37144 20.8229 6.03096C22.7685 7.69048 24.0417 10.003 24.4034 12.5345C24.7651 15.0661 24.1905 17.6426 22.7875 19.7806C21.3844 21.9186 19.2493 23.471 16.783 24.1467C14.3166 24.8223 11.6884 24.5746 9.39167 23.45L3.5 24.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10.5 11.6667C10.5 11.8214 10.5615 11.9698 10.6709 12.0792C10.7803 12.1886 10.9286 12.25 11.0833 12.25C11.238 12.25 11.3864 12.1886 11.4958 12.0792C11.6052 11.9698 11.6667 11.8214 11.6667 11.6667V10.5C11.6667 10.3453 11.6052 10.1969 11.4958 10.0875C11.3864 9.97814 11.238 9.91669 11.0833 9.91669C10.9286 9.91669 10.7803 9.97814 10.6709 10.0875C10.5615 10.1969 10.5 10.3453 10.5 10.5V11.6667ZM10.5 11.6667C10.5 13.2138 11.1146 14.6975 12.2085 15.7915C13.3025 16.8854 14.7862 17.5 16.3333 17.5M16.3333 17.5H17.5C17.6547 17.5 17.8031 17.4386 17.9125 17.3292C18.0219 17.2198 18.0833 17.0714 18.0833 16.9167C18.0833 16.762 18.0219 16.6136 17.9125 16.5042C17.8031 16.3948 17.6547 16.3334 17.5 16.3334H16.3333C16.1786 16.3334 16.0303 16.3948 15.9209 16.5042C15.8115 16.6136 15.75 16.762 15.75 16.9167C15.75 17.0714 15.8115 17.2198 15.9209 17.3292C16.0303 17.4386 16.1786 17.5 16.3333 17.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_733_1740">
+                                                <rect width="28" height="28" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+
+                                </div>
+                                <div>
+                                    واتساپ
+                                </div>
+                            </SocialItem>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <Location />
+        </section>
     );
 }

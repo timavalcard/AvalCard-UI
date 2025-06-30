@@ -1,0 +1,55 @@
+
+
+.marqueeWrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    @apply bg-blue-light py-10 mt-20;
+  }
+  
+  .marqueeContent {
+    display: flex;
+    width: max-content;
+    animation: scroll 300s linear infinite;
+  }
+  
+  .marqueeItem {
+    flex-shrink: 0;
+    margin: 0 2rem;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+  
+    100% {
+      transform: translateX(80%);
+    }
+  }
+  
+
+/* افکت گرادیان در سمت چپ */
+.marqueeWrapper::before,
+.marqueeWrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 170px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    filter: blur(10px);
+}
+
+.marqueeWrapper::before {
+    left: -20px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.marqueeWrapper::after {
+    right: -20px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+

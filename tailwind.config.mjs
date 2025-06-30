@@ -8,13 +8,13 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '15px',
+      padding: '.75rem',
       screens: {
-        'sm': '620px',
-        'md': '748px',
-        'lg': '1004px',
-        'xl': '1250px',
-        '2xl': '1516px',
+        'sm': '540px',
+        'md': '720px',
+        'lg': '960px',
+        'xl': '1140px',
+        '2xl': '1320px',
       }
     },
     extend: {
@@ -44,9 +44,11 @@ export default {
         'custom-yellow-2': '#FFCC00',
         'custom-yellow-3': '#FFC069',
         'blue-custom': '#3664FF',
+        'blue-light': '#F6F9FF',
         'blue-dark-custom': '#003366',
         'blue-light-custom': '#F0F5FF',
-        'gray-custom': '#55636F'
+        'gray-custom': '#55636F',
+        'green-custom': '#00CC99'
       },
       fontSize: {
         'xxs': '.625rem',
@@ -59,8 +61,11 @@ export default {
       },
       backgroundImage: {
         'white': '#fff',
-        'blue-custom-gradient': 'linear-gradient(101.45deg, #8B9DFF -7.53%, #1B3BE7 43.52%)',
+        'blue-custom-gradient': 'linear-gradient(101.45deg, #B4C0FF -7.53%, #3F5AEF 43.52%)',
         'blue-custom-gradient-2': 'linear-gradient(301.45deg, #8B9DFF -7.53%, #1B3BE7 43.52%)',
+      },
+      animation: {
+        'spin-slow': 'spin 2s linear infinite',
       },
     },
   },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from './VerificationCodeInput.module.css'
-const VerificationCodeInput = ({code,setCode, error}) => {
+const VerificationCodeInput = ({ code, setCode, error }) => {
     const inputRefs = [];
 
     const handleChange = (e, index) => {
@@ -19,7 +19,12 @@ const VerificationCodeInput = ({code,setCode, error}) => {
 
     useEffect(() => {
         if (error) {
-            inputRefs[0].focus()
+            const firstEmptyIndex = code.findIndex((digit) => digit === '');
+            if (firstEmptyIndex !== -1) {
+                inputRefs[firstEmptyIndex]?.focus();
+            } else {
+                inputRefs[code.length - 1]?.focus();
+            }
         }
     }, [error])
 
@@ -46,22 +51,30 @@ const VerificationCodeInput = ({code,setCode, error}) => {
     };
 
 
+    const handleClick = () => {
+        const firstEmptyIndex = code.findIndex((digit) => digit === '');
+        if (firstEmptyIndex !== -1) {
+            inputRefs[firstEmptyIndex]?.focus();
+        }
+    }
+
     return (
-        <div className={classes.input_box} style={{direction:"ltr"}}>
+        <div className={classes.input_box} style={{ direction: "ltr" }}>
             {code.map((digit, index) => (
                 <input
                     key={index}
-                    autoFocus={index===0}
+                    autoFocus={index === 0}
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
                     placeholder={'-'}
-                    className={`h-[3.125rem] w-[3.125rem] focus:outline-greenLight transition border border-transparent rounded-[10px] text-dark placeholder-muted ${error && '!border-red-500 focus:outline-red-500 is-invalid'} ${classes} ${error && 'is-invalid'}`}
+                    className={`h-[3.125rem] w-[3.125rem] focus:outline-greenLight transition border rounded-[10px] text-dark placeholder-muted ${error && '!border-red-500 focus:outline-red-500 is-invalid'} ${classes} ${error && 'is-invalid'}`}
                     maxLength="1"
                     onPaste={(e) => handlePaste(e, index)}
                     defaultValue={digit}
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
+                    onClick={handleClick}
                     ref={(input) => {
                         inputRefs[index] = input;
                     }}

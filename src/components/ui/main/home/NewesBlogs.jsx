@@ -3,13 +3,18 @@ import TitleWithIcon from "../../globals/TitleWithIcon";
 import CommentBlog from "@/components/layout/main/CommentBlog";
 import MarqueeBlogs from "./MarqueeBlogs";
 import More2 from "../../globals/More2";
+import {fetchRecentArticles} from "../../../../helpers/api/recent-articles";
 
-export default function NewesBlogs() {
+export default async function NewesBlogs() {
+    const articles= await fetchRecentArticles(2);
     return (
         <div className="mt-32">
+
             <TitleWithIcon
                 title={'جدید ترین مقالات را بخوانید'}
-                more />
+                more
+                moreHref={'/mag'}
+                />
             <div className="opacity-50 mt-2 mr-6">
                 جدید ترین و پر بازدید تریم مقالات روز را میتوانید مشاهده کنید
             </div>
@@ -19,25 +24,20 @@ export default function NewesBlogs() {
                     <MarqueeBlogs />
                 </div>
                 <div className="space-y-8 md:mt-0 pt-10">
-                    <Blog
-                        category={'مقالات آموزشی'}
-                        title={'بوست تلگرام چیست و چه قابلیت‌هایی دارد؟'}
-                        des={'تلگرام همیشه در تلاش بوده با معرفی قابلیت‌های جدید، تجربه کاربران را به سطح بالاتری ببرد. یکی از جدیدترین قابلیت‌هایی که تلگرام معرفی کرده، بوست تلگرام است؛ ویژگی‌ که به…'}
-                        date={' 8 شهریور403 '}
-                        img={'/images/blog-1.svg'}
-                    />
-
-                    <hr className="hidden md:block" />
-
-                    <div className="hidden md:block">
-                        <Blog
-                            category={'مقالات آموزشی'}
-                            title={'بوست تلگرام چیست و چه قابلیت‌هایی دارد؟'}
-                            des={'تلگرام همیشه در تلاش بوده با معرفی قابلیت‌های جدید، تجربه کاربران را به سطح بالاتری ببرد. یکی از جدیدترین قابلیت‌هایی که تلگرام معرفی کرده، بوست تلگرام است؛ ویژگی‌ که به…'}
-                            date={' 8 شهریور403 '}
-                            img={'/images/blog-1.svg'}
-                        />
-                    </div>
+                    {articles.length > 0 && articles.map((item, idx) => (
+                        <div key={item.id}>
+                            <Blog
+                                category={item.category?.[0]?.title || "بدون دسته"}
+                                title={item.title}
+                                des={item.excerpt || " "}
+                                href={item.url || " "}
+                                date={item.created_at}
+                                img={item.media?.url || "/images/blog-1.webp"}
+                            />
+                            {/* نمایش خط جداکننده فقط بین اولین و دومین مقاله */}
+                            {idx === 0 && <hr className="hidden md:block" />}
+                        </div>
+                    ))}
                 </div>
             </div>
 

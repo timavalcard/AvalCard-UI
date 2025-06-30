@@ -3,7 +3,8 @@ import AskedQuestionsBox from "@/components/ui/panel/tickets/AskedQuestionsBox";
 import Chat from "@/components/ui/panel/tickets/Chat";
 import DetailsTicketBox from "@/components/ui/panel/tickets/DetailsTicketBox";
 import SendAnswer from "@/components/ui/panel/tickets/SendAnswer";
-import {fetchGetTicketDetail} from "../../../../helpers/api/getTicketDetail";
+import { fetchGetTicketDetail } from "../../../../helpers/api/getTicketDetail";
+import { notFound } from 'next/navigation'
 
 export const metadata = {
     title: 'جزئیات تیکت'
@@ -12,9 +13,23 @@ export const metadata = {
 export default async function Page({ params }) {
     const { id } = params;
     const ticket = await fetchGetTicketDetail(id);
+    if (!ticket) {
+        notFound();
+    }
+
+    const breadcrump = [{
+        title: 'تیکت ها',
+        href: '/panel/tickets'
+      },
+    {
+        title: `تیکت #${ticket.id}`,
+        href: '#'
+    }
+    ]
+
     return (
         <div className="mt-custom-4">
-            <div className="flex gap-2 items-center text-blue-custom text-sm font-bold">
+            <div className="lg:flex hidden gap-2 items-center text-blue-custom text-sm font-bold pb-4">
                 <div>
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_530_1710)">
@@ -32,20 +47,22 @@ export default async function Page({ params }) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-12 gap-8">
-                <div className="col-span-9">
+            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+                <div className="lg:col-span-9 order-2 lg:order-1 overflow-y-auto">
                     <div className="grid gap-7">
                         <Chat messages={ticket.messages} />
                     </div>
                 </div>
-                <div className="col-span-3 space-y-5">
-                    <AskedQuestionsBox /> 
+                <div className="lg:col-span-3 lg:order-2 order-1">
+                    <div className="sticky top-2 space-y-5 ">
+                        <AskedQuestionsBox />
 
-                    <DetailsTicketBox ticket={ticket} />
+                        <DetailsTicketBox ticket={ticket} />
+                    </div>
                 </div>
             </div>
 
-            <SendAnswer ticketId={id} />
+            <SendAnswer ticket={ticket} ticketId={id} />
         </div>
     );
 }

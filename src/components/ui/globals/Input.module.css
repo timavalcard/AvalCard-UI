@@ -27,6 +27,17 @@
     cursor: pointer;
 }
 
+.box input[type="number"]::-webkit-outer-spin-button,
+.box input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* برای Firefox */
+.box input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .label {
     transition: all .2s;
     cursor: text;
@@ -43,7 +54,7 @@
     content: '';
     position: absolute;
     top: calc(50% - .065rem);
-    height: calc(2px + .065rem);
+    height: calc(2px + .086rem);
     width: calc(100% + 10px);
     background-color: #fff;
     left: -5px;

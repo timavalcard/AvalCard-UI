@@ -6,7 +6,7 @@ export default function ImgFirstCard({classes}) {
     return (
         <div className={`${styles.boxImg} grid justify-center ${classes}`}>
             <div>
-                <img className='h-[35vh]' src="./loginSignup/cashMoney.svg" alt="" />
+                <img loading="lazy" className='h-[35vh]' src="/loginSignup/cashMoney.webp" alt="" />
                 <div className='mt-4 text-center'>
                     <p className='text-[1.25rem] font-extrabold text-[#FFFFFF]'>اولین و شیرین ترین عیدی امسالتو از</p>
                     <p className='text-[2.25rem] font-black text-[#FBFF00]'>اول کارت</p>
@@ -17,8 +17,8 @@ export default function ImgFirstCard({classes}) {
                     />
                 </div>
             </div>
-            <img className={`${styles.imgDots}`} src="./loginSignup/dots.svg" alt="" />
-            <img className={`${styles.imgDotsBottom}`} src="./loginSignup/dots.svg" alt="" />
+            <img loading="lazy" className={`${styles.imgDots}`} src="/loginSignup/dots.webp" alt="" />
+            <img loading="lazy" className={`${styles.imgDotsBottom}`} src="/loginSignup/dots.webp" alt="" />
             <div className={` ${styles.boxContactUs}`}>
                 <div className={`${styles.contactUs}`}>
                     <div>

@@ -10,6 +10,7 @@ import { useState } from 'react'
 export default function ClientContent() {
 
     const [step, setStep] = useState(1);
+    const [mobile, setMobile] = useState("");
 
     const next = () => {
         setStep(pre => pre+1)
@@ -22,10 +23,10 @@ export default function ClientContent() {
     return(
         <>
         <div className={step !== 1 ? 'hidden' : ''}>
-        <ForgetPassword next={next}/>
+        <ForgetPassword setMobile={setMobile} next={next}/>
         </div>
         <div className={step !== 2 ? 'hidden' : ''}>
-        <ConfirmPassword pre={pre} step={step} />
+        <ConfirmPassword mobile={mobile} pre={pre} step={step} />
         </div>
         </>
     );

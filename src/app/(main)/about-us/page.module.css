@@ -1,0 +1,18 @@
+.box {
+    @apply pt-6 space-y-8 text-gray-700 font-medium; 
+}
+
+
+.box h2 {
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.box ul {
+    padding-right: 1.2rem;
+}
+
+.box li {
+    margin-bottom: 0.5rem;
+}

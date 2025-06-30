@@ -1,9 +1,9 @@
 .profilePanel{
     position: absolute;
     top: calc(100% + 8px);
-    width: 150%;
+    width: 317px;
     padding: 16px;
-    right: -25%;
+    right: -37%;
     background-color: #fff;
     border-radius: 20px;
     z-index: 99;
@@ -15,8 +15,14 @@
     transition-delay: .1s;
 }
 
+@media(max-width: 992px)
+{
+    .profilePanel{
+        right: unset;
+        left: -18px;
+    }
+}
 .userBox{
-    border: 1px solid #464646;
     border-radius: 10px;
 }
 
@@ -52,6 +58,6 @@
     visibility: visible;
 }
 
-.profileParent{
+/* .profileParent{
     width: 183px;
-}
+} */

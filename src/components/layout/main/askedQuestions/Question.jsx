@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-export default function Question({ ques, answer, number }) {
+export default function Question({ ques, answer, number, className }) {
 
     const [show, setShow] = useState(false);
 
     return (
-        <div>
-            <div className="flex items-center justify-between p-3.5 cursor-pointer !pb-0" onClick={() => setShow(!show)}>
+        <div className={`bg-white rounded-xl ${className}`}>
+            <div className="flex items-center justify-between p-3.5 cursor-pointer" onClick={() => setShow(!show)}>
                 <div className="flex items-center md:text-lg text-sm gap-4">
                     <div className="w-10 h-10 flex justify-center items-center rounded-2xl bg-[linear-gradient(180deg,_#3F5AEF_22.4%,_#0F2CCA_100%)] text-white font-semibold">
                         {number < 10 && '0'}{number}
@@ -27,7 +27,7 @@ export default function Question({ ques, answer, number }) {
                 </div>
             </div>
 
-            <div className={`pr-16 pl-10 text-sm opacity-70 overflow-hidden transition-all duration-500 h-full leading-6 ${show ? 'max-h-96' : 'max-h-px'}`}>
+            <div className={`pr-16 pl-10 text-sm opacity-70 overflow-hidden transition-all duration-500 h-full leading-6 ${show ? 'max-h-96 pb-3' : 'max-h-px'}`}>
                 {answer}
             </div>
         </div>

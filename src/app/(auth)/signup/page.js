@@ -5,6 +5,10 @@ import ClientContent from './ClientContent'
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
+export const metadata = {
+    title: 'ثبت نام'
+} 
+
 export default function Login(){
     const token = cookies().get("token")?.value;
 

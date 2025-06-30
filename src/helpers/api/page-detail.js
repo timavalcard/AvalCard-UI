@@ -1,6 +1,6 @@
 import APIRequest from "./api";
 
-export async function fetchPageContent(slug) {
+export default async function fetchPageContent(slug) {
     let category = null;
     try {
         const response = await APIRequest.post('page-content' , {slug:slug});

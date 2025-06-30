@@ -6,39 +6,117 @@ import { useEffect, useState } from 'react';
 import styles from './SideBar.module.css';
 
 import { FaAngleDown, FaXmark } from "react-icons/fa6";
+import { FaCartArrowDown } from "react-icons/fa";
 import Image from 'next/image';
 import MenuMobile from '../menuMobile/MenuMobile';
 import { useResponsive } from '@/context/ResponsiveProvider';
+import { fetchCategoriesWithProducts } from "../../../../helpers/api/categories-with-products"
+import { useSelector } from 'react-redux';
 
-function SidebarLink({ href, label, icon, children = false, collapsed, classes }) {
+
+function SidebarLink({ href,count, label, icon, children = false, collapsed, classes, onCloseSidebar }) {
+
+    const [isOpen, setIsOpen] = useState(false);
+
     const pathname = usePathname();
     const isActive = pathname === href;
-    const baseClasses = `flex ${collapsed ? 'lg:justify-center' : 'justify-between px-3.5'} transition-all items-center overflow-hidden rounded-[20px] h-[3.75rem] mt-1`;
-    const activeClasses = isActive ? 'bg-green-light !text-white' : 'text-[#464646]';
+    const baseClasses = `flex ${collapsed ? 'lg:justify-center' : 'justify-between px-3.5'} transition-all items-center overflow-hidden rounded-[20px] py-4`;
+    const activeClasses = isActive ? 'bg-blue-custom-gradient !text-white' : 'text-[#464646]';
     const linkClasses = `${baseClasses} ${activeClasses} ${classes}`;
 
+
+
+    const Content = () => {
+        return (
+            <>
+                <div className="flex items-center gap-2">
+                    <div>{icon}</div>
+                    <div className={`text-base font-medium text-nowrap ${collapsed && 'lg:hidden'}`}>
+                        {label}
+                    </div>
+                    {count > 0 && !collapsed && (
+                        <span style={{display:"inline-block",textAlign:"center",lineHeight:"23px"}} className="ml-2 min-w-[20px] h-[20px] px-1 text-[12px] rounded-full bg-[#3664FF] text-white flex items-center justify-center">
+                        {count}
+                    </span>
+                    )}
+                </div>
+                {children && (
+                    <div className={`${collapsed && 'lg:hidden'} transition-all duration-500 rotate-0 ${isOpen && 'rotate-180'}`}>
+                        <FaAngleDown />
+                    </div>
+                )}
+            </>
+        );
+    }
+
+
     return (
-        <Link href={href} className={linkClasses}>
-            <div className="flex items-center">
-                <div>
-                    {icon}
+        children ?
+            <div>
+                <div className={`cursor-pointer ${linkClasses}`} onClick={() => setIsOpen(!isOpen)}>
+                    <Content />
                 </div>
-                <div className={`mr-2 text-base font-medium text-nowrap ${collapsed && 'lg:hidden'}`}>{label}</div>
+
+                <div className={`max-h-[.1px] ${(isOpen && !collapsed) && '!max-h-56  py-1'} transition-all duration-300 text-sm overflow-hidden pr-11 grid gap-1.5`} onClick={() => setIsOpen(false)}>
+                    {
+                        children.map(item =>
+                            <Link href={item.href} onClick={onCloseSidebar}>
+                                {item.title}
+                            </Link>
+                        )
+                    }
+                </div>
+
             </div>
-            {
-                children &&
-                <div className={`${collapsed && 'lg:hidden'}`}>
-                    <FaAngleDown />
-                </div>
-            }
-        </Link>
+            :
+            <>
+                <Link href={href} className={linkClasses} onClick={onCloseSidebar}>
+                    <Content />
+                </Link>
+            </>
     );
 }
 
 export default function Sidebar() {
+    const [giftCategories, setGiftCategories] = useState([]);
+    const [buyProductCategories, setBuyProductCategories] = useState([]);
+    const [interPaymentCategories, setInterPaymentCategories] = useState([]);
+    const auth = useSelector(state => state.auth);
+    useEffect(() => {
+        const getData = async () => {
+            const result = await fetchCategoriesWithProducts("gift_cart");
+            setGiftCategories(result || []);
+
+        };
+        getData();
+    }, []);
+    useEffect(() => {
+        const getData = async () => {
+            const result = await fetchCategoriesWithProducts("buy_product");
+            setBuyProductCategories(result || []);
+
+        };
+        getData();
+    }, []);
+    useEffect(() => {
+        const getData = async () => {
+            const result = await fetchCategoriesWithProducts("inter_payment");
+            setInterPaymentCategories(result || []);
+
+        };
+        getData();
+    }, []);
+
+
+
 
     const [collapsed, setCollapsed] = useState(false);
     const [showSidebar, setShowSidebar] = useState(false);
+
+
+    const onCloseSidebar = () => {
+        setShowSidebar(false)
+    }
 
     useEffect(() => {
         if (showSidebar) {
@@ -46,21 +124,24 @@ export default function Sidebar() {
         }
     }, [showSidebar])
 
+
+
+
     return (
         <>
             <div className={`${styles.sidebar} ${collapsed ? 'max-w-[120px]' : "max-w-[340px]"} w-full transition-all duration-300 xl:px-6 px-3 pt-8 pb-[35px] h-max translate-x-0 ${!showSidebar && styles.hidden}`}>
 
                 <div className={`justify-between items-center ${!collapsed && 'lg:pl-3.5'} flex`}>
-                    <div className={`${collapsed ? 'lg:hidden' : 'flex'} items-center`}>
+                    <Link href={'/panel'} className={`${collapsed ? 'lg:hidden' : 'flex'} items-center`} onClick={onCloseSidebar}>
                         <div>
-                            <Image width={50} height={50} src="/images/Logo.svg" alt="Logo" />
+                        <Image width={50} height={50} src="/images/logo-sm.png" alt="اول کارت" className='object-cover h-[70px] w-[70px]' />
                         </div>
 
                         <div className="mr-2">
                             <h2 className="font-bold text-green-light Large-text-very-bold">اول کارت</h2>
-                            <p className="text-[#7E7E7E] text-[0.625rem] mt-1 text-nowrap">بهترین ارائه دهنده خدمات پیپال</p>
+                            <p className="text-[#7E7E7E] text-[0.625rem] mt-1 text-nowrap">اتصال به شبکه پرداخت جهانی</p>
                         </div>
-                    </div>
+                    </Link>
 
                     <div onClick={() => setCollapsed(!collapsed)} className={`cursor-pointer transition-all h-[50px] hidden lg:flex items-center justify-center text-[#464646] ${collapsed && 'mx-auto'}`}>
                         <svg className="d-none d-lg-block style_sideBarButton__VXG_y style_open__Tz3CV" width="21" height="21" viewBox="0 0 24 24">
@@ -73,25 +154,26 @@ export default function Sidebar() {
                     </div>
 
                 </div>
-                <hr className="my-6" />
+                <hr className="my-4" />
                 <div>
-                    <p className={`font-color-title-sidebar font-normal ${collapsed && 'lg:text-center'} `}>منوی اصلی</p>
+                    <p className={`font-color-title-sidebar mb-1 font-normal ${collapsed && 'lg:text-center'} `}>منوی اصلی</p>
 
                     <SidebarLink
-                        href="/panel/orders"
-                        label="پیگیری سفارشات"
+                        onCloseSidebar={onCloseSidebar}
+                        href="/panel"
+                        label="داشبورد"
                         icon={
                             <svg width="22" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.7086 15.9853H3.41695C2.26636 15.9853 1.33362 15.0526 1.33362 13.902V3.4853C1.33362 2.3347 2.26636 1.40196 3.41695 1.40196H20.0836C21.2342 1.40196 22.167 2.3347 22.167 3.4853V6.6103H1.33362M14.8753 15.9853L19.6471 11.2134C20.2224 10.6381 21.1552 10.6381 21.7305 11.2134C22.3058 11.7887 22.3058 12.7215 21.7305 13.2968L16.9586 18.0686H14.8753V15.9853Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         }
                         collapsed={collapsed}
-                        children={[]}
                         classes={`lg:flex hidden`}
                     />
 
                     <SidebarLink
-                        href="/panel"
+                        onCloseSidebar={onCloseSidebar}
+                        href="/panel/buy-deliver-iran/"
                         label="خرید کالا و تحویل در ایران"
                         icon={
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -100,11 +182,21 @@ export default function Sidebar() {
 
                         }
                         collapsed={collapsed}
-                        children={[]}
-                        classes={`lg:flex hidden`}
+                        children={[
+                            {
+                                title: 'تمام محصولات',
+                                href: '/panel/buy-deliver-iran'
+                            },
+                            ...buyProductCategories.map(category => ({
+                                title: category.title,
+                                href: `/panel/buy-deliver-iran/#gift-card-box-${category.id}`
+                            }))
+                        ]}
+                    // classes={`lg:flex hidden`}
                     />
 
                     <SidebarLink
+                        onCloseSidebar={onCloseSidebar}
                         href="/panel/gift-cards"
                         label="گیفت کارت ها"
                         icon={
@@ -113,11 +205,21 @@ export default function Sidebar() {
                             </svg>
                         }
                         collapsed={collapsed}
-                        children={[]}
-                        classes={`lg:flex hidden`}
+                        children={[
+                            {
+                                title: 'تمام محصولات',
+                                href: '/panel/gift-cards'
+                            },
+                            ...giftCategories.map(category => ({
+                                title: category.title,
+                                href: `/panel/gift-cards/#gift-card-box-${category.id}`
+                            }))
+                        ]}
+                    // classes={`lg:flex hidden`}
                     />
 
                     <SidebarLink
+                        onCloseSidebar={onCloseSidebar}
                         href="/panel/currency-income"
                         label="نقد کردن درامد های ارزی"
                         icon={
@@ -126,10 +228,21 @@ export default function Sidebar() {
                             </svg>
                         }
                         collapsed={collapsed}
+                        children={[
+                            {
+                                title: 'ثبت سفارش',
+                                href: '/panel/currency-income'
+                            },
+                            {
+                                title: 'سفارش ها',
+                                href: '/panel/currency-income/orders'
+                            }
+                        ]}
                     />
 
                     <SidebarLink
-                        href="/panel/international-payment"
+                        onCloseSidebar={onCloseSidebar}
+                        href="/panel/foreign-payment"
                         label="پرداخت در سایت های خارجی"
                         icon={
                             <svg width="22" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,46 +250,59 @@ export default function Sidebar() {
                             </svg>
                         }
                         collapsed={collapsed}
+                        children={[
+                            {
+                                title: 'تمام محصولات',
+                                href: '/panel/foreign-payment'
+                            },
+                            ...interPaymentCategories.map(category => ({
+                                title: category.title,
+                                href: `/panel/foreign-payment/#foreign-card-box-${category.id}`
+                            }))
+                        ]}
                     />
-
                     <SidebarLink
-                        href="/panel/services"
-                        label="سرویس ها"
+                        onCloseSidebar={onCloseSidebar}
+                        href="/panel/orders"
+                        label="سفارش ها"
                         icon={
-                            <svg width="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.04301 11.1223H18.543M6.04301 15.289H13.3347M22.7097 18.414C22.7097 18.9665 22.4902 19.4964 22.0995 19.8871C21.7088 20.2778 21.1789 20.4973 20.6263 20.4973H3.95968C3.40714 20.4973 2.87724 20.2778 2.48654 19.8871C2.09584 19.4964 1.87634 18.9665 1.87634 18.414V3.83065C1.87634 3.27811 2.09584 2.74821 2.48654 2.35751C2.87724 1.96681 3.40714 1.74731 3.95968 1.74731H9.16801L11.2513 4.87231H20.6263C21.1789 4.87231 21.7088 5.09181 22.0995 5.48251C22.4902 5.87321 22.7097 6.40311 22.7097 6.95565V18.414Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg width="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 12H8M16 16H8M16 8H8M6 22H18C19.1046 22 20 21.1046 20 20V4C20 2.89543 19.1046 2 18 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             </svg>
                         }
                         collapsed={collapsed}
                     />
                 </div>
 
-                <hr className="my-6" />
+                <hr className="lg:my-4 my-2" />
 
                 <div>
-                    <p className={`font-color-title-sidebar font-normal ${collapsed && 'lg:text-center'} `}>راهنمایی</p>
+                    <p className={`font-color-title-sidebar mb-1 font-normal ${collapsed && 'lg:text-center'} `}>راهنمایی</p>
                     <SidebarLink
+                        onCloseSidebar={onCloseSidebar}
                         href="/panel/tickets"
                         label="تیکت و پشتیبانی"
+                        count={auth.user  ? auth.user.unchecked_tickets : 0}
                         icon={
                             <svg width="19" viewBox="0 0 19 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.16785 12.6698V9.54476C1.16785 7.33462 2.04582 5.21501 3.60862 3.6522C5.17143 2.0894 7.29104 1.21143 9.50118 1.21143C11.7113 1.21143 13.8309 2.0894 15.3937 3.6522C16.9565 5.21501 17.8345 7.33462 17.8345 9.54476V12.6698M1.16785 12.6698C1.16785 12.1172 1.38734 11.5873 1.77804 11.1966C2.16874 10.8059 2.69865 10.5864 3.25118 10.5864H4.29285C4.84538 10.5864 5.37528 10.8059 5.76599 11.1966C6.15669 11.5873 6.37618 12.1172 6.37618 12.6698V15.7948C6.37618 16.3473 6.15669 16.8772 5.76599 17.2679C5.37528 17.6586 4.84538 17.8781 4.29285 17.8781H3.25118C2.69865 17.8781 2.16874 17.6586 1.77804 17.2679C1.38734 16.8772 1.16785 16.3473 1.16785 15.7948V12.6698ZM17.8345 12.6698C17.8345 12.1172 17.615 11.5873 17.2243 11.1966C16.8336 10.8059 16.3037 10.5864 15.7512 10.5864H14.7095C14.157 10.5864 13.6271 10.8059 13.2364 11.1966C12.8457 11.5873 12.6262 12.1172 12.6262 12.6698V15.7948C12.6262 16.3473 12.8457 16.8772 13.2364 17.2679C13.6271 17.6586 14.157 17.8781 14.7095 17.8781H15.7512M17.8345 12.6698V15.7948C17.8345 16.3473 17.615 16.8772 17.2243 17.2679C16.8336 17.6586 16.3037 17.8781 15.7512 17.8781M15.7512 17.8781C15.7512 19.6041 12.9533 21.0031 9.50118 21.0031" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         }
+                        children={[
+                            {
+                                title: 'تیکت ها',
+                                href: '/panel/tickets/'
+                            },
+                            {
+                                title: 'ثبت تیکت جدید',
+                                href: '/panel/tickets/add'
+                            }
+                        ]}
                         collapsed={collapsed}
+
                     />
                     <SidebarLink
-                        href="/panel/profile"
-                        label="مدیریت حساب"
-                        icon={
-                            <svg width="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2.79362 19.6829C2.9293 18.8166 3.46843 17.6934 4.0962 17.0656C4.8776 16.2842 5.93741 15.8452 7.04248 15.8452H15.3758C16.4809 15.8452 17.5407 16.2842 18.3221 17.0656C18.7419 17.4855 19.0629 17.9857 19.2701 18.5302C19.372 18.7979 19.4978 19.4484 19.5428 19.7332M3.91781 1.2619H18.5011C19.6517 1.2619 20.5845 2.19464 20.5845 3.34523L20.5845 17.9286C20.5845 19.0792 19.6517 20.0119 18.5011 20.0119H3.91781C2.76721 20.0119 1.83447 19.0792 1.83447 17.9286L1.83447 3.34523C1.83447 2.19464 2.76721 1.2619 3.91781 1.2619ZM15.3761 8.55357C15.3761 10.8548 13.5107 12.7202 11.2095 12.7202C8.90829 12.7202 7.04281 10.8548 7.04281 8.55357C7.04281 6.25238 8.90829 4.3869 11.2095 4.3869C13.5107 4.3869 15.3761 6.25238 15.3761 8.55357Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        }
-                        collapsed={collapsed}
-                        classes={`lg:flex hidden`}
-                    />
-                    <SidebarLink
+                        onCloseSidebar={onCloseSidebar}
                         href="/panel/logout"
                         label="خروج از حساب کاربری"
                         icon={
@@ -188,23 +314,24 @@ export default function Sidebar() {
                         classes={'text-custom-red-2 hover:text-custom-red-3'}
                     />
                 </div>
-                <hr className="my-6 lg:flex hidden" />
+                <hr className="lg:my-6 my-2" />
 
                 <div className='lg:mt-0 mt-3'>
-                    <p className={`font-color-title-sidebar font-normal ${collapsed && 'text-center'} lg:flex hidden`}>
+                    <p className={`font-color-title-sidebar mb-1 font-normal ${collapsed && 'text-center justify-center'} flex`}>
                         پشتیبانی
                         {!collapsed && ' تلفنی '}
                     </p>
                     <SidebarLink
-                        href="tel:09214808245"
-                        label="0921-480-8245"
+                        onCloseSidebar={onCloseSidebar}
+                        href="tel:09300952804"
+                        label="0930-095-2804"
                         icon={
                             <svg width="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.91536 1.76184H6.91663C7.76852 1.76184 8.53458 2.28049 8.85096 3.07144L9.95923 5.84213C10.2899 6.66882 9.97174 7.6133 9.20825 8.0714C8.39869 8.55713 8.08543 9.59247 8.6153 10.3739C9.4781 11.6462 10.5751 12.7432 11.8475 13.606C12.6288 14.1359 13.6642 13.8226 14.1499 13.0131C14.608 12.2496 15.5525 11.9314 16.3792 12.2621L19.1499 13.3704C19.9408 13.6867 20.4595 14.4528 20.4595 15.3047V18.306C20.4595 18.891 20.2271 19.4521 19.8134 19.8658C19.3997 20.2794 18.8386 20.5118 18.2536 20.5118C13.9513 20.2504 9.89347 18.4234 6.84568 15.3756C3.7979 12.3278 1.97092 8.27001 1.70947 3.96772C1.70947 3.38269 1.94188 2.82161 2.35556 2.40793C2.76924 1.99425 3.33032 1.76184 3.91536 1.76184Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         }
                         collapsed={collapsed}
-                        classes={`lg:flex hidden`}
+                    // classes={`lg:flex hidden`}
                     />
                     <div>
                         {!collapsed && <p className="font-color-title-sidebar lg:text-center ">پاسخگوی تلفنی 9 صبح الی 9 شب</p>}

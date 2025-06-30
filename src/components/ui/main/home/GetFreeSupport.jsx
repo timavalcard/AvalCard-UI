@@ -15,7 +15,7 @@ export default function GetFreeSupport() {
                         </div>
 
                         <div className="mt-8">
-                            <img src="/images/get-free-support.svg" className="w-full mx-auto" />
+                            <img loading="lazy" src="/images/photo_2025-05-12_14-05-31.jpg" className="w-full h-full mx-auto rounded-lg" height={400} width={400} alt="دریافت مشـــاوره رایــگان " />
                         </div>
 
                     </div>

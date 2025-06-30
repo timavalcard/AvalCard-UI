@@ -5,8 +5,9 @@
     width: 100%;
     /* background: linear-gradient(225.26deg, #3664FF 34.34%, #1143EB 96.57%); */
     background: url(/images/bg-login.svg);
-    background-position: center bottom;
+    background-position: left bottom;
     background-size: cover;
+    background-repeat: no-repeat;
     background-color: #fff;
     position: relative;
 }

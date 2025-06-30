@@ -1,50 +1,131 @@
+"use client"
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import {useState} from "react"
 import Section from "@/components/layout/main/Section";
 import Input from "../../globals/Input";
 import Button from "../../globals/Button";
+import InputError from "../../globals/InputError";
+import {addFormEntrance} from "../../../../helpers/api/addFormEntrance";
+
+const schema = yup.object().shape({
+    name: yup.string().required("نام و نام خانوادگی الزامی است"),
+    form_id: yup.string().required("نام و نام خانوادگی الزامی است"),
+    email: yup.string().email("ایمیل نامعتبر است").required("ایمیل الزامی است"),
+    unit: yup.string().required("واحد مربوطه را انتخاب کنید"),
+    phone: yup
+    .string()
+    .required("شماره تماس الزامی است")
+    .matches(/^09\d{9}$/, "شماره تلفن باید با 09 شروع شده و 11 رقم باشد"),
+    message: yup.string().required("متن پیام الزامی است"),
+});
 
 export default function Form() {
+
+    const [loading, setLoading] = useState(false)
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({ resolver: yupResolver(schema) });
+    let [ShowFeedback,setShowFeedback]=useState(false);
+    const HideFeedback=()=>{
+        setShowFeedback(false)
+    }
+    const onSubmit = async (data) => {
+        setLoading(true)
+        await addFormEntrance(data,setShowFeedback)
+        reset();
+        setLoading(false)
+    };
+
     return (
-        <form>
-            <Section className={'space-y-6'}>
-                <div className="flex gap-6 items-center">
-                    <div>
-                        <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect opacity="0.32" width="32" height="32" rx="16" fill="#0000A1" />
-                            <path d="M3 19C3 10.1634 10.1634 3 19 3H25C33.8366 3 41 10.1634 41 19V41H19C10.1634 41 3 33.8366 3 25V19Z" fill="#0000A1" />
-                            <path d="M27 21H19M27 25H23M24 14H22C17.0294 14 13 18.0294 13 23C13 27.9706 17.0294 32 22 32H29C31.2091 32 33 30.2091 33 28V23C33 18.0294 28.9706 14 24 14Z" stroke="white" stroke-width="2" stroke-linecap="round" />
+        <div className="text-[#202020]">
+            <h2 className="text-2xl font-bold mb-4">فرم تماس</h2>
+            <p className="mb-4 text-sm">
+                کاربران گرامی، برای پیگیری یا سوال درباره سفارش خود، فرم زیر را تکمیل کنید.
+            </p>
+
+            {ShowFeedback && (
+                <div className="mt-4 rounded-2xl bg-green-100 border border-green-400 text-green-800 px-6 py-4 text-sm shadow-md transition-opacity duration-500">
+                    <p className="flex items-center gap-2">
+                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
-                    </div>
-                    <div className="text-2xl text-gray-700 font-black">
-                        به ما پیام دهید
-                    </div>
+                        با تشکر از پیام شما، به زودی با شما تماس می‌گیریم.
+                    </p>
+                </div>
+            )}
+
+
+            <form onSubmit={handleSubmit(onSubmit)} className="gap-4 mt-7 grid grid-cols-2">
+                <input type="hidden" {...register("form_id")} value="1"/>
+                <div>
+                    <Input
+                        {...register("name")}
+                        placeholder="نام و نام خانوادگی"
+                        error={errors.name}
+                    />
+                    <InputError error={errors.name?.message} />
                 </div>
 
-                <Input
-                    placeholder={'نام و نام خانوادگی خود را وارد کنید.'}
-                />
-                <Input
-                    placeholder={'شماره همراه خودر را وارد کنید.'}
-                />
-                <Input
-                    placeholder={'ایمیل خود را وارد کنید.'}
-                />
-                <Input
-                    placeholder={'موضوع پیام خود را وارد کنید.'}
-                />
+                <div>
+                    <Input
+                        {...register("email")}
+                        placeholder="پست الکترونیکی"
+                        error={errors.email}
+                    />
+                    <InputError error={errors.email?.message} />
+                </div>
 
-                <Input
-                    isTextarea={true}
-                    placeholder={'متن پیام خود را اینجا بنویسید.'}
-                    rows={4}
-                    height="!h-auto"
-                    labelClassName="!top-6"
-                />
+                <div>
 
-                <Button color="blue">
-                    ارسال
+                    <Input
+                        isSelect
+                        placeholder="واحد مربوطه"
+                        error={errors.unit}
+                        {...register("unit")}>
+                        <option value="" disabled hidden selected>واحد مربوطه را انتخاب کنید</option>
+                        <option value="پشتیبانی">پشتیبانی</option>
+                        <option value="فروش">فروش</option>
+                    </Input>
+                    <InputError error={errors.unit?.message} />
+                </div>
+
+                <div>
+                    <Input
+                        {...register("phone")}
+                        placeholder="شماره تماس"
+                        error={errors.phone}
+                    />
+                    <InputError error={errors.phone?.message} />
+                </div>
+
+                <div className="col-span-2">
+                    <Input
+                        isTextarea
+                        textAreaClasses
+                        {...register("message")}
+                        rows={4}
+                        placeholder="متن پیام شما"
+                        error={errors.message}
+                    />
+                    <InputError error={errors.message?.message} />
+                </div>
+
+                <div className="flex justify-end col-span-2">
+                <Button type='submit' gradient={'blue'} size="lg"
+                loading={loading}
+                >
+                ثبت و ارسال پیام
                 </Button>
+                </div>
 
-            </Section>
-        </form>
+            </form>
+        </div>
     );
 }

@@ -1,6 +1,6 @@
 import APIRequest from "./api";
 
-export async function fetchArticle(slug) {
+export default async function fetchArticle(slug) {
     let article = null;
     try {
         const response = await APIRequest.post('article',{ slug: slug });

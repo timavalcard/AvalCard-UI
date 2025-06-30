@@ -8,7 +8,7 @@ export default function UploadFile({ setValue, name, errors = [], text = "برا
     const [isPdf, setIsPdf] = useState(false);
     const inputRef = useRef(null)
 
-    const SUPPORTED_FORMATS = ["image/png", "image/jpg"];
+    const SUPPORTED_FORMATS = ["image/png", "image/jpeg"];
     const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
 
     const handleFileChange = (e) => {
@@ -60,14 +60,15 @@ export default function UploadFile({ setValue, name, errors = [], text = "برا
     };
 
     return (
-        <div className={` border border-[#1A2531] border-opacity-15 ${styles['upload-box']} ${filePreview || isPdf ? styles['uploaded'] : ""} ${fileError || errors[name] ? `${styles["error"]} !border-custom-red` : ""}`}>
+        <div className={`w-full border border-[#1A2531] border-opacity-15 ${styles['upload-box']} ${filePreview || isPdf ? styles['uploaded'] : ""} ${fileError || errors[name] ? `${styles["error"]} !border-custom-red` : ""}`}>
             <input
                 className="cursor-pointer"
                 type="file"
-                accept=".png"
+                accept=".png, .jpg, .jpeg"
                 onChange={handleFileChange}
                 ref={inputRef}
             />
+
 
             {isPdf ? (
                 <img
@@ -95,7 +96,7 @@ export default function UploadFile({ setValue, name, errors = [], text = "برا
                         width="20"
                         height="20"
                         fill="currentColor"
-                        className={`bi bi-trash3 ${styles['file-trash']}`}
+                        className={`bi bi-trash3 mr-1 ${styles['file-trash']}`}
                         viewBox="0 0 16 16"
                         onClick={handleRemoveFile}
                     >

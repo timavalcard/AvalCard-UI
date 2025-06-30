@@ -1,0 +1,14 @@
+User-agent: *
+disallow: /panel/
+disallow: /panel/*
+disallow: /search/*
+disallow: */feed/
+disallow: *?s*
+disallow: /rss
+disallow: *utm_*
+disallow: /search?q=*
+disallow: /_next/
+disallow: /_next/*
+disallow: /images/*
+
+Sitemap: https://avalcard.com/sitemap_index.xml

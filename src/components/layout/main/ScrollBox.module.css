@@ -1,0 +1,29 @@
+.box{
+    @apply max-h-[55vh] overflow-y-auto sm:pl-10 pl-3 mt-16;
+}
+
+
+.box::-webkit-scrollbar {
+    width: 12px;
+}
+
+.box::-webkit-scrollbar-track {
+    background: #F6F9FF;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.box::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    
+    @apply bg-blue-custom;
+}
+
+.box h2{
+    @apply text-xl font-bold mb-6 mt-10
+}
+
+.box p{
+    @apply opacity-50 text-sm leading-7 mb-6;
+}

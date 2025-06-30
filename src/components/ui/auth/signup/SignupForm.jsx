@@ -10,6 +10,8 @@ import * as yup from 'yup'
 import Link from 'next/link'
 import checkEmailExists from "../../../../helpers/functions/checkEmailExists";
 import { registerAndSencCode } from "../../../../helpers/api/register";
+import Button from '../../globals/Button'
+import { useState } from 'react'
 
 const phoneRegExp = /^09\d{9}$/;
 
@@ -17,11 +19,7 @@ const phoneRegExp = /^09\d{9}$/;
 const schema = yup.object().shape({
   identifier: yup
     .string()
-    .required('وارد کردن شماره موبایل الزامی است')
-      .test('unique-email', 'این شماره موبایل قبلا ثبت شده است.', async function (value) {
-        const emailExists = await checkEmailExists(value);
-        return !emailExists;
-      })
+    .required(' ')
     .test(
       'is-email-or-phone',
       'فرمت شماره موبایل معتبر نیست',
@@ -30,14 +28,24 @@ const schema = yup.object().shape({
         const isPhone = phoneRegExp.test(value);
         return isPhone;
       }
-    ),
+    )
+    .test('unique-email', 'این شماره موبایل قبلا ثبت شده است.', async function (value) {
+      const emailExists = await checkEmailExists(value);
+      return !emailExists;
+    })
+    ,
+  name: yup
+    .string()
+    .required(' '),
   password: yup
     .string()
-    .required('وارد کردن رمز عبور الزامی است')
+    .required(' ')
     .min(8, 'رمز عبور باید حداقل 8 رقمی باشد'),
 });
 
-export default function SignupForm({next,setEmail,setPassword}) {
+export default function SignupForm({ next, setEmail, setPassword }) {
+  const [loading, setLoading] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -47,31 +55,29 @@ export default function SignupForm({next,setEmail,setPassword}) {
   });
 
   const onSubmit = (data) => {
-    registerAndSencCode(data.identifier, data.password)
+    setLoading(true)
+    registerAndSencCode(data.identifier, data.password, data.name)
     setEmail(data.identifier)
     setPassword(data.password)
-    next()
-    console.log(data);
+    setLoading(false)
+    next();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-12">
-        <div className="col-span-5 grid">
+      <div className="flex justify-center lg:grid-cols-12 grid-cols-1 h-full items-center">
+        <div className="lg:col-span-5 grid">
           <div className={`${styles.boxLoginSignup}`}>
             <LoginSignup />
             <div className={`${styles.loginSignup}`}>
-              <div className="flex">
-              <Link href={'/login'} className="Largest-text-very-bold cursor-pointer">ورود</Link>
-                <p className="mr-6 Largest-text-very-bold cursor-pointer">
+              <div className="flex lg:justify-start justify-center">
+                <Link href={'/login'} className="Largest-text-very-bold cursor-pointer">ورود</Link>
+                <p className="mr-5 Largest-text-very-bold cursor-pointer border-b-4 pb-1.5 rounded px-1.5 border-blue-custom">
                   ثبت نام
                 </p>
               </div>
-              <div
-                className={`bg-greenLight mt-1.5 mr-[3.8rem] ${styles.lineUnderBox}`}
-              ></div>
               <div className="mt-6">
-                <p className="text-very-bold">
+                <p className="text-very-bold text-center lg:text-right">
                   برای ثبت نام شماره موبایل خود را وارد کنید
                 </p>
                 <div className="flex relative mt-4">
@@ -79,6 +85,7 @@ export default function SignupForm({next,setEmail,setPassword}) {
                     classes={``}
                     placeholder="شماره موبایل خود را وارد کنید"
                     error={errors.identifier?.message}
+                    showError={true}
                     {...register('identifier')}
                   />
                 </div>
@@ -88,28 +95,36 @@ export default function SignupForm({next,setEmail,setPassword}) {
                     placeholder="رمز عبور"
                     error={errors.password?.message}
                     name='password'
+                    showError={true}
                     register={register}
                   />
                 </div>
-                <p className={`${styles.forgetPasssword} mt-3 cursor-pointer`}>
+                <p className={`${styles.forgetPasssword} mt-3 cursor-pointer text-center lg:text-right `}>
                   رمز عبور باید حداقل 8 رقمی باشد.
                 </p>
-                <ButtonAuth
-                  text="ثبت نام"
-                  classes="bg-blue-custom py-3 text-[#FFFFFF] Largest-text-little-bold mt-8"
-                  type="submit"
-                />
-                {/*<div className="flex">
-                  <div className={`${styles.orLine}`}></div>
-                  <p className="text-very-bold mt-3 mx-3.5">یا</p>
-                  <div className={`${styles.orLineSecond}`}></div>
+
+                <div className="flex relative mt-4">
+                  <Input
+                    classes={``}
+                    placeholder="نام کامل خود را وارد کنید"
+                    error={errors.name?.message}
+                    showError={true}
+                    {...register('name')}
+                  />
                 </div>
-                <ButtonAuth
-                  text="ثبت نام با گوگل"
-                  classes={`${styles.btnGoGoogle} mt-3 py-3.5 Large-text-bold`}
-                />*/}
+
+
+                <Button
+                  className="mt-8"
+                  type="submit"
+                  size='full'
+                  loading={loading}
+                >
+                  ثبت نام
+                </Button>
+                
                 <div className="mt-4">
-                  <p className="text-very-bold">
+                  <p className="text-very-bold text-center lg:text-right">
                     عضو اول کارت هستم!
                     <Link href={'/login'} className="mr-2 text-blue-custom cursor-pointer">
                       ورود
@@ -120,9 +135,9 @@ export default function SignupForm({next,setEmail,setPassword}) {
             </div>
           </div>
         </div>
-        <div className="col-span-7">
+        {/*<div className="col-span-7 hidden lg:block">
           <ImgFirstCard classes={``} />
-        </div>
+        </div>*/}
       </div>
     </form>
   );

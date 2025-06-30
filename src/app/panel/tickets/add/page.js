@@ -1,11 +1,24 @@
+import Breadcrump from "@/components/layout/Breadcrump";
 import Form from "@/components/ui/panel/tickets/add/Form";
 
 export const metadata = {
     title: 'ارسال تیکت'
 }
 
+const breadcrump = [{
+    title: 'تیکت ها',
+    href: '/panel/tickets'
+  },
+{
+    title: 'ثبت تیکت',
+    href: '#'
+}
+]
+
 export default function page() {
     return (
+        <>
+        <Breadcrump items={breadcrump} />
         <div className="mt-custom-4">
             <div className="flex gap-2 items-center text-blue-custom text-sm font-bold">
                 <div>
@@ -33,5 +46,6 @@ export default function page() {
                 <Form />
             </div>
         </div>
+        </>
     );
 }

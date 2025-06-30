@@ -2,14 +2,14 @@ import Image from "next/image";
 import EmailBox from "./EmailBox";
 import SubFooter from "./SubFooter";
 import Link from "next/link";
-import { footerItems } from "@/constants/data";
+import { footerItems,footerItems2 } from "@/constants/data";
 import EndFooter from "./EndFooter";
 import Chatbot from "../../Chatbot";
 
 export default function Footer() {
     return (
         <footer className="!bg-white mt-14">
-            <Chatbot />
+            {/*<Chatbot />*/}
             <SubFooter />
 
             <div className="container">
@@ -28,7 +28,7 @@ export default function Footer() {
                     <div className="space-y-4">
                         <div>
                             <Image
-                                src="/images/logo-main.svg"
+                                src="/images/logo-main.png"
                                 width={190}
                                 height={49}
                             />
@@ -40,9 +40,26 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-3 text-sm font-normal gap-y-4 gap-x-8 md:mt-0 mt-12">
+                     <div>
+                        <a referrerPolicy='origin' target='_blank'
+                           href='https://trustseal.enamad.ir/?id=596171&Code=z7q3HXcAiXcuOxXGemaB00fclnM2jpxu'><img
+                            referrerPolicy='origin'
+                            src='https://trustseal.enamad.ir/logo.aspx?id=596171&Code=z7q3HXcAiXcuOxXGemaB00fclnM2jpxu'
+                            alt='' style={{cursor:"pointer"}} code='z7q3HXcAiXcuOxXGemaB00fclnM2jpxu' /></a>
+                    </div>
+
+                    <div className="grid grid-cols-1 text-sm font-normal gap-y-4 gap-x-8 md:mt-0 mt-12">
                         {
                             footerItems.map(item =>
+                                <Link href={item.link}>
+                                    {item.title}
+                                </Link>
+                            )
+                        }
+                    </div>
+                    <div className="grid grid-cols-1 text-sm font-normal gap-y-4 gap-x-8 md:mt-0 mt-12">
+                        {
+                            footerItems2.map(item =>
                                 <Link href={item.link}>
                                     {item.title}
                                 </Link>

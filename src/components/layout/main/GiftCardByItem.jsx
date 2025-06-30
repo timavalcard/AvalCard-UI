@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function GiftCardByItem({ icon, title, href='/' }) {
     return (
-        <Link className="bg-white p-8 rounded-2xl space-y-6 hover:bg-blue-custom hover:!text-white" href={href}>
-            <div>
+        <Link className="bg-white p-8 shadow-[0_0_10px_0_rgb(54,100,255,40%)] rounded-2xl space-y-6 hover:bg-blue-custom hover:!text-white" href={href}>
+            <div className="size-16 bg-blue-light text-black rounded-2lg flex justify-center items-center">
                 {icon}
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-start">
                 <div className="font-bold">
                     {title}
                 </div>

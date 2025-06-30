@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1ba76e2-abd1-46f3-b056-c862bcb19d54" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/actions/authActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/actions/authActions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,18 +53,31 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\panel" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\(main)\foreign-payment\[category]" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\(main)\buy-deliver-iran\[category]" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\(main)\gift-card\[category]" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\helpers\api\currencyIncome" />
       <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\helpers\api" />
-      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI" />
-      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src" />
-      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\components\layout\main" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\components\ui\auth" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\helpers\api" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\(main)\buy-deliver-iran\[category]\[id]" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\src\app\(main)\foreign-payment\[category]\[id]" />
+      <recent name="K:\web\projects\react_project\Avalcard\AvalCard-UI\public\images" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -79,7 +93,79 @@
       <workItem from="1743763285095" duration="6400000" />
       <workItem from="1743792158713" duration="19000" />
       <workItem from="1743870904077" duration="5360000" />
-      <workItem from="1743953349287" duration="1332000" />
+      <workItem from="1743953349287" duration="1401000" />
+      <workItem from="1744135870402" duration="4422000" />
+      <workItem from="1744227130957" duration="371000" />
+      <workItem from="1744284015749" duration="22000" />
+      <workItem from="1744298104437" duration="12025000" />
+      <workItem from="1744391011682" duration="4885000" />
+      <workItem from="1744450749854" duration="599000" />
+      <workItem from="1744480557606" duration="8343000" />
+      <workItem from="1744564220377" duration="8000" />
+      <workItem from="1744571979906" duration="3357000" />
+      <workItem from="1744659598553" duration="1366000" />
+      <workItem from="1744718139327" duration="516000" />
+      <workItem from="1744734442028" duration="6626000" />
+      <workItem from="1744877303149" duration="18000" />
+      <workItem from="1744897907727" duration="760000" />
+      <workItem from="1745176002154" duration="1198000" />
+      <workItem from="1745248304945" duration="40000" />
+      <workItem from="1745252280508" duration="10541000" />
+      <workItem from="1745333360468" duration="10016000" />
+      <workItem from="1745428599824" duration="392000" />
+      <workItem from="1745513256592" duration="10603000" />
+      <workItem from="1745527008303" duration="712000" />
+      <workItem from="1745563625107" duration="14707000" />
+      <workItem from="1745658756695" duration="24105000" />
+      <workItem from="1745705173930" duration="90000" />
+      <workItem from="1745750027378" duration="7251000" />
+      <workItem from="1745865136535" duration="6132000" />
+      <workItem from="1745922473381" duration="6226000" />
+      <workItem from="1745942980951" duration="8663000" />
+      <workItem from="1746034607754" duration="1291000" />
+      <workItem from="1746092447738" duration="3737000" />
+      <workItem from="1746098920676" duration="7229000" />
+      <workItem from="1746175679713" duration="7927000" />
+      <workItem from="1746282710090" duration="7728000" />
+      <workItem from="1746368675480" duration="11069000" />
+      <workItem from="1746455522226" duration="8765000" />
+      <workItem from="1746569836748" duration="930000" />
+      <workItem from="1746618213061" duration="4423000" />
+      <workItem from="1746636643398" duration="645000" />
+      <workItem from="1746692976371" duration="3624000" />
+      <workItem from="1746705014541" duration="7582000" />
+      <workItem from="1746801892988" duration="7712000" />
+      <workItem from="1746818456906" duration="3107000" />
+      <workItem from="1746888368487" duration="1157000" />
+      <workItem from="1746970538168" duration="693000" />
+      <workItem from="1746995987571" duration="1008000" />
+      <workItem from="1747040351599" duration="11533000" />
+      <workItem from="1747314002737" duration="931000" />
+      <workItem from="1747389666527" duration="32000" />
+      <workItem from="1747421975918" duration="196000" />
+      <workItem from="1747496551617" duration="14000" />
+      <workItem from="1747583229435" duration="5522000" />
+      <workItem from="1747735671182" duration="2161000" />
+      <workItem from="1747755540330" duration="2270000" />
+      <workItem from="1747846428230" duration="4984000" />
+      <workItem from="1747925020717" duration="932000" />
+      <workItem from="1748027512436" duration="846000" />
+      <workItem from="1748083898159" duration="917000" />
+      <workItem from="1748171778096" duration="3376000" />
+      <workItem from="1748250991301" duration="4000" />
+      <workItem from="1748251037966" duration="4141000" />
+      <workItem from="1748433752278" duration="6000" />
+      <workItem from="1748446151527" duration="2557000" />
+      <workItem from="1748529791034" duration="19000" />
+      <workItem from="1748530967765" duration="11239000" />
+      <workItem from="1748703583257" duration="589000" />
+      <workItem from="1748807070950" duration="1406000" />
+      <workItem from="1748866134953" duration="966000" />
+      <workItem from="1748868891694" duration="1730000" />
+      <workItem from="1748881095032" duration="4307000" />
+      <workItem from="1748947017336" duration="704000" />
+      <workItem from="1749148370833" duration="587000" />
+      <workItem from="1749719492305" duration="922000" />
     </task>
     <servers />
   </component>
@@ -99,17 +185,52 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="581" y="96" key="FileChooserDialogImpl" timestamp="1743875432640">
+    <state x="402" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1746093986750">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="581" y="96" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1743875432640" />
-    <state x="479" y="0" width="1130" height="1040" key="find.popup" timestamp="1743872804114">
+    <state x="402" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1746093986750" />
+    <state x="540" y="263" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1749719791800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="479" y="0" width="1130" height="1040" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1743872804114" />
-    <state x="364" y="228" key="run.anything.popup" timestamp="1743698138727">
+    <state x="540" y="263" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1749719791800" />
+    <state x="581" y="96" key="FileChooserDialogImpl" timestamp="1749148957374">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="364" y="228" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1743698138727" />
+    <state x="581" y="96" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1749148957374" />
+    <state x="651" y="375" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1746181868325">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="651" y="375" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1746181868325" />
+    <state x="509" y="-78" width="1130" height="1072" key="find.popup" timestamp="1748889874845">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="509" y="-78" width="1130" height="1072" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1748889874845" />
+    <state x="338" y="46" width="1225" height="928" key="recent.locations.popup" timestamp="1747849659062">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="338" y="46" width="1225" height="928" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1747849659062" />
+    <state x="364" y="228" width="1177" height="1976" key="run.anything.popup" timestamp="1748544084863">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="364" y="228" width="1177" height="1976" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1748544084863" />
+    <state x="369" y="-2" width="1177" height="1976" key="search.everywhere.popup" timestamp="1745671237864">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="369" y="-2" width="1177" height="1976" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1745671237864" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/ui/auth/confirmPassword/confirmPassword.jsx</url>
+          <line>5</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/ui/panel/giftCards/Img.jsx</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

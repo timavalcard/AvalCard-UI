@@ -8,8 +8,10 @@ import Input from "@/components/ui/globals/Input";
 import UploadFile from "@/components/ui/globals/UploadFile/UploadFile";
 import AskedQuestions from "@/components/layout/main/askedQuestions/AskedQuestions";
 import AskedQuestionsBox from "../AskedQuestionsBox";
-import {fetchAddTicket} from "../../../../../helpers/api/addTicket";
+import { fetchAddTicket } from "../../../../../helpers/api/addTicket";
 import { useRouter } from "next/navigation";
+import { useState } from "react"
+
 const schema = yup.object().shape({
     subject: yup.string().required("این فیلد الزامی است"),
     message: yup.string().required("این فیلد الزامی است"),
@@ -28,22 +30,25 @@ export default function Form() {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = async (data) => {
-        try {
+    const [isLoading, setIsLoading] = useState(false);
 
-            const tickets=await fetchAddTicket(data.subject,data.department, data.message,data.file); // ارسال به API
-            console.log(data);
+    const onSubmit = async (data) => {
+        setIsLoading(true)
+        try {
+            const tickets = await fetchAddTicket(data.subject, data.department, data.message, data.file); // ارسال به API
             router.push("/panel/tickets");
         } catch (error) {
             console.error("خطا در ارسال پاسخ:", error);
+        }finally{
+            setIsLoading(false)
         }
 
     };
 
     return (
         <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-12 gap-8 items-start">
-                <div className="col-span-9 grid grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-12 grid-cols-1 md:gap-8 gap-5 items-start">
+                <div className="md:col-span-9 grid sm:grid-cols-2 grid-cols-1 gap-5">
                     <Input
                         className="rounded-xl"
                         placeholder="موضوع تیکت "
@@ -59,34 +64,41 @@ export default function Form() {
                         isSelect
                     >
                         <option value="">انتخاب</option>
-                        <option value={'	امور اداری	'}>
-                        امور اداری	
+                        <option value={'فروش'}>
+                            فروش
                         </option>
-                        <option value={'	امور مالی	'}>
-                        امور مالی	
+                        <option value={'پشتیبانی'}>
+                            پشتیبانی
                         </option>
-                        <option value={'	امور فنی	'}>
-                            امور فنی
+                        <option value={'خرید گیفت کارت'}>
+                            خرید گیفت کارت
                         </option>
+                        <option value={'نقد کردن درآمد'}>نقد کردن درآمد</option>
+                        <option value={'خرید کالا'}>خرید کالا</option>
+                        <option value={'پرداخت در وب سایت‌های خارجی'}>پرداخت در وب سایت‌های خارجی</option>
                     </Input>
+                    <div className="sm:col-span-2">
+                        <Input
+                            placeholder="پیام خود را بنویسید"
+                            height="!h-[10rem]"
+                            isTextarea
+                            boxClasses="sm:col-span-2"
+                            className="rounded-xl"
+                            labelClassName="!top-6"
+                            {...register("message")}
+                            error={errors.message}
+                        />
+                    </div>
 
-                    <Input
-                        placeholder="پیام خود را بنویسید"
-                        height="!h-[10rem]"
-                        isTextarea
-                        boxClasses="col-span-2"
-                        className="rounded-xl"
-                        labelClassName="!top-6"
-                        {...register("message")}
-                        error={errors.message}
-                    />
 
-                    <Button className={'!rounded-xl mt-3'} size="xl" type="submit">
-                        ثبت و ارسال اطلاعات
-                    </Button>
+                    <div className="sm:col-span-2">
+                        <Button loading={isLoading} className={'!rounded-xl mt-3 md:block hidden mx-auto'} size="2xl" type="submit" gradient={'blue'}>
+                            ثبت و ارسال اطلاعات
+                        </Button>
+                    </div>
                 </div>
-                <div className="col-span-3 grid gap-7">
-                    <AskedQuestionsBox />
+                <div className="md:col-span-3 grid md:gap-7 gap-5">
+                    <AskedQuestionsBox className={'hidden md:block'} />
 
                     <UploadFile
                         name={'file'}
@@ -94,6 +106,14 @@ export default function Form() {
                         setValue={setValue}
                         trigger={trigger}
                     />
+
+                    <Button loading={isLoading} className={'!rounded-xl mt-3 md:hidden'} size="full" type="submit" gradient={'blue'}>
+                        ثبت و ارسال اطلاعات
+                    </Button>
+                </div>
+
+                <div className={'md:hidden '}>
+                    <AskedQuestionsBox />
                 </div>
             </div>
         </form>

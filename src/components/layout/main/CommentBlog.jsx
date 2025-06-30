@@ -11,7 +11,7 @@ export default function CommentBlog() {
                 <div className="flex gap-1 items-center">
                     <div>
                         <Image
-                            src={'/images/comment-blog-1.svg'}
+                            src={'/images/user-icon-comment.jpg'}
                             width={45}
                             height={45}
                             className="rounded-[50%]"

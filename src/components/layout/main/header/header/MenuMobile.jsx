@@ -9,10 +9,10 @@ import Image from "next/image";
 import Authentication from "./Authentication";
 import { menuMainMobile } from "@/constants/data";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
-const Item = ({ svg, value, children, className, href = false }) => {
+const Item = ({ svg, value, children, className, href = false, onClick }) => {
     const [open, setOpen] = useState(false)
     const content = (
         <>
@@ -37,7 +37,7 @@ const Item = ({ svg, value, children, className, href = false }) => {
                 <div className="bg-[#F5F6F8] rounded-lg py-4 px-6 space-y-3 text-xs text-[#55636F] mt-3">
                     {
                         children.map(item => (
-                            <Link href={item.href} className="block">
+                            <Link href={item.href} className="block" onClick={onClick}>
                                 {item.value}
                             </Link>
                         ))
@@ -52,7 +52,7 @@ const Item = ({ svg, value, children, className, href = false }) => {
                 {content}
             </div>
             :
-            <Link href={href} className="block">
+            <Link href={href} className="block" onClick={onClick}>
                 {content}
             </Link>
 
@@ -60,16 +60,27 @@ const Item = ({ svg, value, children, className, href = false }) => {
 }
 
 export default function MenuMobile({ hidden, setHidden }) {
+
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     return createPortal(
         <>
-            <div className={`fixed grid h-screen !items-start top-0 w-64 bg-white z-50 transition-all px-6 py-8 ${!hidden ? 'right-0' : '-right-full'}`}>
+            <div className={`fixed grid h-dvh !items-start top-0 w-64 bg-white z-[999999] transition-all px-6 py-8 ${!hidden ? 'right-0' : '-right-full'}`}>
                 <div className="space-y-6">
 
-                    <Image
-                        src={'/images/logo-main.svg'}
-                        width={153}
-                        height={41}
-                    />
+                    <Link href={'/'}  onClick={setHidden}>
+                        <Image
+                            src={'/images/logo-main.png'}
+                            width={153}
+                            height={41}
+                        />
+                    </Link>
 
                     <Authentication full />
 
@@ -78,7 +89,7 @@ export default function MenuMobile({ hidden, setHidden }) {
                         {
                             menuMainMobile.map(item =>
 
-                                <Item value={item.value} svg={item.svg} href={item.href} children={item.children} />
+                                <Item value={item.value} svg={item.svg} href={item.href} children={item.children} onClick={setHidden} />
                             )
                         }
                     </div>
@@ -97,12 +108,12 @@ export default function MenuMobile({ hidden, setHidden }) {
                             </clipPath>
                         </defs>
                     </svg>
-                    } value={'0۹۱۳-۵۸۷-۹۸۸۷'} href="tel:0۹۱۳۵۸۷۹۸۸۷" />
+                    } value={'0۹۱۳-۵۸۷-۹۸۸۷'} href="tel:09135879887" />
                 </div>
 
             </div>
 
-            {!hidden && <Overlay setClose={setHidden} />}
+            {!hidden && <Overlay className={'z-[999998]'} setClose={setHidden} />}
         </>
         , document.body)
 

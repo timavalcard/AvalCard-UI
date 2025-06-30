@@ -34,9 +34,9 @@ const defaultItems = [
 ]
 
 
-export default function InlineMenu({ items = defaultItems, itemClasses='', className='', color='text-muted-2', setActiveItem }) {
+export default function InlineMenu({ items = defaultItems, itemClasses='', className='', color='text-muted-2', setActiveItem, activeDefault=0 }) {
 
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(activeDefault);
     const [lists, setLists] = useState(items);
 
     useEffect(() => {
@@ -45,19 +45,23 @@ export default function InlineMenu({ items = defaultItems, itemClasses='', class
         }
     }, [active])
 
+    useEffect(() => {
+            setActive(activeDefault)
+    }, [activeDefault])
+
 
     return (
-        <div className={`custom-shadow rounded-[10px] flex justify-between p-5 mt-custom-4 ${className}`}>
+        <div className={`custom-shadow rounded-[10px] flex  p-5 mt-custom-4 flex-nowrap overflow-x-auto ${className}`}>
             {
                 lists.map((item, index) =>
-                    <div className={`flex items-center align-middle gap-[10px] cursor-pointer ${itemClasses} rounded-[20px] h-[2.75rem] px-5 transition-all ${index === active ? 'bg-greenLight text-white' : color} `}
+                    <div className={`flex flex-nowrap items-center align-middle gap-[10px] cursor-pointer min-w-max ${itemClasses} rounded-[20px] h-[2.75rem] px-5 transition-all ${index === active ? 'bg-greenLight text-white' : color} `}
 
                         onClick={() => setActive(index)}
                     >
                         <div>
                             {item.icon}
                         </div>
-                        <div className="mt-[2px]">
+                        <div className="mt-[2px] flex-nowrap flex">
                             {item.title}
                         </div>
                     </div>

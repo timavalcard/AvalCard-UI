@@ -1,16 +1,51 @@
+import TitleBlue from "@/components/ui/globals/TitleBlue";
 import Content from "@/components/ui/main/termsConditions/Content";
 import Link from "next/link";
+import fetchPageContent from "../../../helpers/api/page-detail";
+export const dynamic = 'force-dynamic';
+export async function generateMetadata() {
+    const { data: page } = await fetchPageContent("terms-conditions");
 
-export const metadata = {
-    title: 'قوانین و مقررات'
+    return {
+        title: page.meta_title,
+        description: page.meta_description,
+        robots: `${page.meta_follow}, ${page.meta_index}`,
+        openGraph: {
+            locale: "fa_IR",
+            type: "website",
+            title: page.meta_title,
+            description: page.meta_description,
+            url: page.url,
+            siteName: "اول کارت",
+            updatedTime: page.updated_at,
+            images: [
+                {
+                    url: "/img/logo.png",
+                    secureUrl: "/img/logo.png",
+                    width: 1200,
+                    height: 630,
+                    alt: "اول کارت",
+                    type: "image/jpeg",
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: page.meta_title,
+            description: page.meta_description,
+        },
+        alternates: {
+            canonical: page.url,  // اضافه کردن URL canonical به متاداده‌ها
+        }
+    };
 }
 
 export default function Page() {
     return (
         <div className="mt-custom-3">
             <div className="container ">
-                <div className="flex text-sm gap-3 font-semibold items-center">
-                    <Link href={'/'} className="text-[#464646]">
+                <div className="flex text-sm gap-3 font-semibold items-center mb-7">
+                    <Link href={'/'} className="text-[#959595]">
                         اول کارت
                     </Link>
                     <div>
@@ -18,17 +53,13 @@ export default function Page() {
                             <path d="M5 9L1 5L5 1" stroke="#959595" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
-                    <div className="px-2 py-1 bg-blue-custom text-white rounded-md">
+                    <div className="text-[#464646]">
                         قوانین و مقرات
                     </div>
                 </div>
-            </div>
-
-            <div className="bg-[url(/images/terms-conditions.svg)] min-h-52 mt-custom-3 font-semibold text-5xl align-middle flex items-center justify-center text-white">
-                قوانین و مقررات استفاده از خدمات اول کارت
-            </div>
-
-            <div className="container ">
+                <TitleBlue>
+                    قوانین و مقررات استفاده از خدمات اول کارت
+                </TitleBlue>
                 <div className="mt-custom-3">
                     <Content />
                 </div>
