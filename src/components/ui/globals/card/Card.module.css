@@ -1,0 +1,10 @@
+.boxGiftCard{
+    box-shadow: 0 0 10px #0000001A;
+    border-radius: 20px;
+    padding: 12px;
+    padding-bottom: 14px;
+}
+
+.boxGiftCard img{
+    width: 100%;
+}
