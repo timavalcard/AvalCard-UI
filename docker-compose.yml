@@ -7,7 +7,7 @@ services:
     container_name: avalfront
     restart: always
     ports:
-      - "4345:4345"
+      - "80:4345"
     networks:
       - frontend-net
 
